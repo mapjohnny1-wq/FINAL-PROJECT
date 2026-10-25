@@ -2894,6 +2894,325 @@ h3, h4 {
     will-change: transform;
 }
 
+/* 3. Chữ Khổng Lồ Trôi Ngang Trên Hero & Khung Phù Điêu Cổng Vòm */
+.hero-giant-text {
+    position: absolute;
+    bottom: -18px;
+    left: -5%;
+    font-family: var(--font-head);
+    font-size: clamp(72px, 14vw, 190px);
+    font-weight: 900;
+    line-height: 1;
+    white-space: nowrap;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(245, 217, 150, 0.14);
+    pointer-events: none;
+    z-index: 1;
+    will-change: transform;
+    user-select: none;
+}
+
+.portal-stage {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.portal-split-word {
+    position: absolute;
+    top: 50%;
+    font-family: var(--font-head);
+    font-size: clamp(36px, 6.2vw, 86px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(22, 58, 43, 0.22);
+    pointer-events: none;
+    z-index: 1;
+    white-space: nowrap;
+    will-change: transform, opacity;
+}
+
+[data-theme="dark"] .portal-split-word {
+    -webkit-text-stroke: 1.5px rgba(245, 217, 150, 0.22);
+}
+
+.portal-split-word.left {
+    left: 3%;
+    transform: translateY(-50%);
+}
+
+.portal-split-word.right {
+    right: 3%;
+    transform: translateY(-50%);
+}
+
+.portal-side-card {
+    position: absolute;
+    width: 210px;
+    height: 270px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 2px solid rgba(212, 163, 70, 0.45);
+    box-shadow: var(--shadow);
+    z-index: 1;
+    will-change: transform, opacity;
+    pointer-events: none;
+}
+
+.portal-side-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.portal-side-card.left {
+    left: 6%;
+    top: 16%;
+}
+
+.portal-side-card.right {
+    right: 6%;
+    bottom: 12%;
+}
+
+/* 4. Dải Chữ Kinetic Chạy Ngược Chiều Theo Tốc Độ Cuộn (Dual Counter-Scroll Ribbons) */
+.kinetic-bands {
+    position: relative;
+    overflow: hidden;
+    padding: 34px 0;
+    background: var(--green-dark);
+    border-top: 1px solid rgba(212, 163, 70, 0.25);
+    border-bottom: 1px solid rgba(212, 163, 70, 0.25);
+}
+
+.kinetic-row {
+    display: flex;
+    gap: 42px;
+    white-space: nowrap;
+    font-family: var(--font-head);
+    font-size: clamp(26px, 4.2vw, 52px);
+    font-weight: 900;
+    line-height: 1.25;
+    will-change: transform;
+    user-select: none;
+}
+
+.kinetic-row.r1 {
+    color: var(--gold-light);
+    margin-bottom: 10px;
+}
+
+.kinetic-row.r2 {
+    color: transparent;
+    -webkit-text-stroke: 1.2px rgba(245, 217, 150, 0.45);
+}
+
+.kinetic-row span {
+    display: inline-flex;
+    align-items: center;
+    gap: 42px;
+}
+
+.kinetic-row span::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--gold);
+    transform: rotate(45deg);
+    display: inline-block;
+}
+
+/* 5. Chồng Thẻ Không Gian 3D Khi Cuộn (3D Stacking Sticky Cards) */
+.stack-section {
+    position: relative;
+    padding: 110px 6% 120px;
+    background: var(--paper);
+}
+
+.stack-deck {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+}
+
+.stack-card {
+    position: sticky;
+    top: 96px;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    min-height: 420px;
+    border-radius: 28px;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid rgba(212, 163, 70, 0.35);
+    box-shadow: 0 28px 64px -18px rgba(9, 28, 20, 0.32);
+    transform-origin: center top;
+    will-change: transform, filter;
+    transition: box-shadow 0.3s ease;
+}
+
+.stack-card:nth-child(2) { top: 118px; }
+.stack-card:nth-child(3) { top: 140px; }
+.stack-card:nth-child(4) { top: 162px; }
+
+.stack-card-content {
+    padding: 46px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stack-index {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+[data-theme="dark"] .stack-index {
+    color: var(--gold-light);
+}
+
+.stack-card-content h3 {
+    font-size: clamp(24px, 3vw, 34px);
+    color: var(--green);
+    margin-bottom: 14px;
+}
+
+[data-theme="dark"] .stack-card-content h3 {
+    color: #fff;
+}
+
+.stack-card-content p {
+    color: var(--muted);
+    font-size: 15.5px;
+    margin-bottom: 24px;
+}
+
+.stack-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 26px;
+}
+
+.stack-meta span {
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 12.5px;
+    font-weight: 700;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    color: var(--text);
+}
+
+.stack-card-visual {
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+}
+
+.stack-card-visual img {
+    width: 100%;
+    height: 118%;
+    object-fit: cover;
+    transform: translateY(-8%);
+    will-change: transform;
+}
+
+.stack-card-visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(6, 20, 14, 0.25), transparent 45%);
+}
+
+/* 6. Tuyên Ngôn Chữ Sáng Dần Theo Nhịp Cuộn (Scroll-Scrubbed Manifesto) */
+.scrub-section {
+    position: relative;
+    padding: 140px 6%;
+    background:
+        radial-gradient(circle at 50% 50%, rgba(212, 163, 70, 0.14), transparent 65%),
+        var(--green-dark);
+    color: #fff;
+    overflow: hidden;
+}
+
+.scrub-container {
+    max-width: 920px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 3;
+}
+
+.scrub-text {
+    font-family: var(--font-serif);
+    font-size: clamp(24px, 3.8vw, 44px);
+    font-weight: 600;
+    line-height: 1.48;
+    color: #fff;
+}
+
+.scrub-word {
+    display: inline-block;
+    opacity: 0.18;
+    transform: translateY(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    margin-right: 0.22em;
+}
+
+.scrub-word.lit {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scrub-word.gold.lit {
+    color: var(--gold-light);
+    font-style: italic;
+}
+
+.scrub-float-img {
+    position: absolute;
+    width: 210px;
+    height: 260px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1.5px solid rgba(245, 217, 150, 0.35);
+    opacity: 0.32;
+    pointer-events: none;
+    z-index: 1;
+    will-change: transform;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.scrub-float-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.scrub-float-img.f1 {
+    left: 4%;
+    top: 14%;
+}
+
+.scrub-float-img.f2 {
+    right: 4%;
+    bottom: 12%;
+}
+
 /* ---------- Keyframe Animations ---------- */
 @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -2940,7 +3259,10 @@ h3, h4 {
 
 /* ---------- Responsive (Máy tính bảng & Điện thoại) ---------- */
 @media (max-width: 1100px) {
-    .hero-showcase {
+    .hero-showcase,
+    .portal-side-card,
+    .portal-split-word,
+    .scrub-float-img {
         display: none;
     }
     .features,
@@ -3075,6 +3397,22 @@ h3, h4 {
         scroll-snap-align: start;
         width: min(400px, 84vw);
         height: 390px;
+    }
+    .stack-card {
+        position: static;
+        grid-template-columns: 1fr;
+        transform: none !important;
+        filter: none !important;
+    }
+    .stack-card-content {
+        padding: 32px 26px;
+    }
+    .stack-card-visual {
+        min-height: 240px;
+        order: -1;
+    }
+    .scrub-section {
+        padding: 84px 5%;
     }
     .timeline::before {
         left: 18px;

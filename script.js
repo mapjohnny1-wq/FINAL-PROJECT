@@ -668,17 +668,37 @@
         });
     }
 
-    /* 18. Hệ thống Scroll Parallax Đa Tầng, Cổng Vòm Mở Rộng & Cuộn Ngang (ERA Residence Style) */
+    /* 18. Hệ thống Scroll Parallax Đột Phá (ERA Residence + 3D Stack + Scrub Text + Kinetic Ribbons) */
     var heroBg = $('.hero-bg-parallax');
+    var heroGiant = $('#hero-giant-text');
     var speedEls = $$('[data-speed]');
     var portalSec = $('#portal-showcase');
     var portalArch = $('#portal-arch');
     var portalImg = $('#portal-img');
+    var portalWordL = $('#portal-word-left'), portalWordR = $('#portal-word-right');
+    var portalCardL = $('#portal-card-left'), portalCardR = $('#portal-card-right');
+    var kineticR1 = $('#kinetic-r1'), kineticR2 = $('#kinetic-r2');
     var hscrollSec = $('#hscroll-showcase');
     var hscrollTrack = $('#hscroll-track');
     var hscrollIdx = $('#hscroll-index');
     var hscrollFill = $('#hscroll-fill');
     var hscrollImgs = $$('.hscroll-slide-img img');
+    var stackCards = $$('.stack-card');
+    var scrubSec = $('#scrub-manifesto');
+    var scrubTextEl = $('#scrub-text');
+    var scrubWords = [];
+
+    /* Khởi tạo tách từng từ cho Tuyên ngôn Chữ sáng dần theo nhịp cuộn */
+    if (scrubTextEl) {
+        var goldList = (scrubTextEl.getAttribute('data-gold') || '').split(',');
+        var rawWords = scrubTextEl.textContent.trim().split(/\s+/);
+        scrubTextEl.innerHTML = rawWords.map(function (w) {
+            var clean = w.toLowerCase().replace(/[^a-zA-ZÀ-ỹ]/g, '');
+            var isGold = goldList.indexOf(clean) !== -1;
+            return '<span class="scrub-word' + (isGold ? ' gold' : '') + '">' + w + '</span>';
+        }).join(' ');
+        scrubWords = $$('.scrub-word', scrubTextEl);
+    }
 
     /* Chuyển đổi sắc thái Ngày / Đêm ngay trên Cổng Vòm */
     var moodBtns = $$('.mood-btn');
@@ -717,10 +737,15 @@
             var vh = window.innerHeight;
             var vw = window.innerWidth;
 
-            /* a) Hero Background Zoom + Translate Parallax */
-            if (heroBg && sy < vh * 1.4) {
-                var heroScale = 1 + (sy * 0.00018);
-                heroBg.style.transform = 'translate3d(0, ' + (sy * 0.32) + 'px, 0) scale(' + heroScale + ')';
+            /* a) Hero Background Zoom + Chữ khổng lồ trôi ngang */
+            if (sy < vh * 1.5) {
+                if (heroBg) {
+                    var heroScale = 1 + (sy * 0.0002);
+                    heroBg.style.transform = 'translate3d(0, ' + (sy * 0.34) + 'px, 0) scale(' + heroScale + ')';
+                }
+                if (heroGiant) {
+                    heroGiant.style.transform = 'translate3d(' + (-sy * 0.42) + 'px, 0, 0)';
+                }
             }
 
             /* b) Các phần tử có thuộc tính data-speed dịch chuyển đa tầng */
@@ -730,31 +755,57 @@
                     var sp = parseFloat(el.getAttribute('data-speed')) || 0;
                     var rect = el.getBoundingClientRect();
                     var centerOffset = (rect.top + rect.height / 2) - vh / 2;
-                    if (rect.bottom > -200 && rect.top < vh + 200) {
+                    if (rect.bottom > -250 && rect.top < vh + 250) {
                         el.style.transform = 'translate3d(0, ' + (centerOffset * sp) + 'px, 0)';
                     }
                 }
             }
 
-            /* c) Cổng Vòm Kiến Trúc Mở Rộng Khi Cuộn (Portal Arch Expand) */
+            /* c) Cổng Vòm Kiến Trúc Mở Rộng + Chữ Tách Đôi & Thẻ Phụ Trôi Dạt */
             if (portalSec && portalArch && vw > 920) {
                 var pRect = portalSec.getBoundingClientRect();
                 var totalScroll = portalSec.offsetHeight - vh;
                 if (totalScroll > 0) {
                     var p = Math.max(0, Math.min(1, -pRect.top / totalScroll));
-                    var wPct = 48 + p * 46; /* Mở rộng từ 48vw lên 94vw */
-                    var hPct = 56 + p * 30; /* Mở rộng từ 56vh lên 86vh */
+                    var wPct = 46 + p * 48;
+                    var hPct = 56 + p * 30;
                     var archRadius = Math.round(280 * (1 - p) + 24 * p);
                     portalArch.style.width = wPct + 'vw';
                     portalArch.style.height = hPct + 'vh';
                     portalArch.style.borderRadius = archRadius + 'px ' + archRadius + 'px 24px 24px';
                     if (portalImg) {
-                        portalImg.style.transform = 'translate3d(0, ' + (-12 + p * 12) + '%, 0) scale(' + (1.12 - p * 0.08) + ')';
+                        portalImg.style.transform = 'translate3d(0, ' + (-12 + p * 12) + '%, 0) scale(' + (1.14 - p * 0.08) + ')';
+                    }
+                    if (portalWordL) {
+                        portalWordL.style.transform = 'translate3d(' + (-p * 220) + 'px, -50%, 0)';
+                        portalWordL.style.opacity = String(1 - p * 0.85);
+                    }
+                    if (portalWordR) {
+                        portalWordR.style.transform = 'translate3d(' + (p * 220) + 'px, -50%, 0)';
+                        portalWordR.style.opacity = String(1 - p * 0.85);
+                    }
+                    if (portalCardL) {
+                        portalCardL.style.transform = 'translate3d(' + (-p * 180) + 'px, ' + (-p * 90) + 'px, 0) rotate(' + (-6 - p * 8) + 'deg)';
+                        portalCardL.style.opacity = String(1 - p * 0.9);
+                    }
+                    if (portalCardR) {
+                        portalCardR.style.transform = 'translate3d(' + (p * 180) + 'px, ' + (p * 90) + 'px, 0) rotate(' + (6 + p * 8) + 'deg)';
+                        portalCardR.style.opacity = String(1 - p * 0.9);
                     }
                 }
             }
 
-            /* d) Dải Trượt Ngang Khi Cuộn Dọc (Horizontal Scroll Gallery) */
+            /* d) Dải Chữ Kinetic Chạy Ngược Chiều Theo Tốc Độ Cuộn */
+            if (kineticR1 && kineticR2) {
+                var kRect = kineticR1.parentNode.getBoundingClientRect();
+                if (kRect.bottom > -200 && kRect.top < vh + 200) {
+                    var kShift = (vh - kRect.top) * 0.22;
+                    kineticR1.style.transform = 'translate3d(' + (-kShift) + 'px, 0, 0)';
+                    kineticR2.style.transform = 'translate3d(' + (kShift - 320) + 'px, 0, 0)';
+                }
+            }
+
+            /* e) Dải Trượt Ngang Khi Cuộn Dọc (Horizontal Scroll Gallery) */
             if (hscrollSec && hscrollTrack && vw > 920) {
                 var hRect = hscrollSec.getBoundingClientRect();
                 var hTotal = hscrollSec.offsetHeight - vh;
@@ -768,6 +819,38 @@
                     for (var k = 0; k < hscrollImgs.length; k++) {
                         hscrollImgs[k].style.transform = 'translate3d(' + (-12 + hp * 12) + '%, 0, 0) scale(1.06)';
                     }
+                }
+            }
+
+            /* f) Chồng Thẻ Không Gian 3D Khi Cuộn (3D Stacking Sticky Cards) */
+            if (stackCards.length && vw > 920) {
+                for (var s = 0; s < stackCards.length; s++) {
+                    var sc = stackCards[s];
+                    var sImg = $('.stack-card-visual img', sc);
+                    var sRect = sc.getBoundingClientRect();
+                    if (sImg && sRect.bottom > 0 && sRect.top < vh) {
+                        var imgP = (vh - sRect.top) / (vh + sRect.height);
+                        sImg.style.transform = 'translate3d(0, ' + (-12 + imgP * 14) + '%, 0) scale(1.05)';
+                    }
+                    var nextCard = stackCards[s + 1];
+                    if (nextCard) {
+                        var nRect = nextCard.getBoundingClientRect();
+                        var overlap = Math.max(0, Math.min(1, (vh * 0.72 - nRect.top) / (vh * 0.5)));
+                        var scaleVal = 1 - overlap * 0.06;
+                        var brightVal = 1 - overlap * 0.22;
+                        sc.style.transform = 'scale(' + scaleVal + ')';
+                        sc.style.filter = 'brightness(' + brightVal + ')';
+                    }
+                }
+            }
+
+            /* g) Tuyên Ngôn Chữ Sáng Dần Theo Nhịp Cuộn (Scroll-Scrubbed Words) */
+            if (scrubSec && scrubWords.length) {
+                var scRect = scrubSec.getBoundingClientRect();
+                var scProgress = (vh * 0.78 - scRect.top) / (scRect.height * 0.85);
+                var litCount = Math.floor(Math.max(0, Math.min(1, scProgress)) * scrubWords.length);
+                for (var wIdx = 0; wIdx < scrubWords.length; wIdx++) {
+                    scrubWords[wIdx].classList.toggle('lit', wIdx <= litCount);
                 }
             }
         }
