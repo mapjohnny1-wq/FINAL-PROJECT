@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Về dự án Bản Đồ Di Sản Quê Mình – mục tiêu, giá trị và hành trình.">
+    <meta name="description" content="Về dự án Bản Đồ Di Sản Quê Mình – mục tiêu, giá trị cốt lõi và hành trình thực hiện.">
     <title>Giới thiệu | Bản Đồ Di Sản Quê Mình</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,23 +13,28 @@
 <body>
 <div class="progress" aria-hidden="true"></div>
 <header class="header">
-    <a href="index.html" class="logo">DI SẢN<span>.</span></a>
-    <button class="burger" aria-label="Mở menu" aria-expanded="false" aria-controls="nav"><span></span></button>
+    <a href="index.html" class="logo"><span class="logo-mark">🏮</span>DI SẢN<span>.</span></a>
     <nav class="nav" id="nav">
-            <a href="index.html">Trang chủ</a>
-            <a href="gioi-thieu.html" class="active" aria-current="page">Giới thiệu</a>
-            <a href="ban-do.html">Bản đồ</a>
-            <a href="di-san.html">Di sản</a>
-            <a href="cau-chuyen.html">Câu chuyện</a>
-            <a href="dong-gop.html" class="nav-cta">Đóng góp</a>
+        <a href="index.html">Trang chủ</a>
+        <a href="gioi-thieu.html" class="active" aria-current="page">Giới thiệu</a>
+        <a href="ban-do.html">Bản đồ</a>
+        <a href="di-san.html">Di sản</a>
+        <a href="cau-chuyen.html">Câu chuyện</a>
+        <a href="thu-vien.html">Thư viện &amp; Lễ hội</a>
+        <a href="dong-gop.html" class="nav-cta">Đóng góp</a>
     </nav>
+    <div class="header-actions">
+        <button class="theme-toggle" type="button" aria-label="Đổi giao diện Sáng/Tối">🌙</button>
+        <button class="burger" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="nav"><span></span></button>
+    </div>
 </header>
+
 <section class="page-hero">
     <span class="orb o1"></span><span class="orb o2"></span>
     <div class="container">
-        <p class="crumbs"><a href="index.html">Trang chủ</a> / Giới thiệu</p>
-        <h1 class="reveal">Về dự án</h1>
-        <p class="sub reveal" style="--d:.15s">Một dự án cộng đồng của học sinh, giúp mọi người hiểu và yêu hơn nơi mình sinh sống.</p>
+        <p class="crumbs"><a href="index.html">Trang chủ</a> <span>/</span> Giới thiệu</p>
+        <h1 class="reveal">Về dự án của chúng mình</h1>
+        <p class="sub reveal" style="--d:.15s">Một sáng kiến học đường phi lợi nhuận nhằm đánh thức tình yêu lịch sử, văn hóa địa phương qua lăng kính công nghệ số.</p>
     </div>
 </section>
 
@@ -37,14 +42,26 @@
 <section class="section">
     <div class="container">
         <div class="section-heading">
-            <p class="eyebrow reveal">SỨ MỆNH</p>
-            <h2 class="reveal">Lưu giữ những giá trị quê hương</h2>
-            <p class="lead reveal">Bản Đồ Di Sản Quê Mình giúp tìm hiểu các địa điểm văn hóa, lịch sử thông qua bản đồ, hình ảnh và những câu chuyện được sưu tầm, kiểm chứng.</p>
+            <p class="eyebrow reveal">SỨ MỆNH CỐT LÕI</p>
+            <h2 class="reveal">Lưu giữ hồn quê cho thế hệ mai sau</h2>
+            <p class="lead reveal">Bản Đồ Di Sản Quê Mình kết hợp bản đồ số, tư liệu nhiếp ảnh và ký ức truyền miệng được kiểm chứng để mỗi người trẻ đều trở thành một “đại sứ di sản”.</p>
         </div>
         <div class="features">
-            <div class="feature reveal"><div class="icon">🔎</div><h3>Khám phá</h3><p>Tìm thấy những địa điểm di sản ngay quanh bạn trên bản đồ trực quan.</p></div>
-            <div class="feature reveal" style="--d:.12s"><div class="icon">🤝</div><h3>Kết nối</h3><p>Kết nối các thế hệ qua việc hỏi chuyện người lớn tuổi, ghi lại ký ức địa phương.</p></div>
-            <div class="feature reveal" style="--d:.24s"><div class="icon">🏛️</div><h3>Lưu giữ</h3><p>Số hóa tư liệu để di sản không bị lãng quên theo thời gian.</p></div>
+            <div class="feature reveal">
+                <div class="icon">🔎</div>
+                <h3>Khám phá trực quan</h3>
+                <p>Biến những trang sách lịch sử thành trải nghiệm tương tác sinh động ngay trên bản đồ số và bộ lọc thông minh.</p>
+            </div>
+            <div class="feature reveal" style="--d:.12s">
+                <div class="icon">🤝</div>
+                <h3>Kết nối thế hệ</h3>
+                <p>Khuyến khích học sinh trò chuyện cùng các bậc cao niên, nghệ nhân làng nghề để ghi chép lại ký ức quý giá.</p>
+            </div>
+            <div class="feature reveal" style="--d:.24s">
+                <div class="icon">🏛️</div>
+                <h3>Lưu trữ bền vững</h3>
+                <p>Số hóa hình ảnh, tọa độ và nguồn tham khảo rõ ràng để tư liệu địa phương không bị mai một theo năm tháng.</p>
+            </div>
         </div>
     </div>
 </section>
@@ -53,13 +70,38 @@
     <div class="container">
         <div class="section-heading">
             <p class="eyebrow reveal">HÀNH TRÌNH DỰ ÁN</p>
-            <h2 class="reveal">Từ ý tưởng đến bản đồ</h2>
+            <h2 class="reveal">Từ ý tưởng lớp học đến bản đồ số</h2>
+            <p class="lead reveal">Quy trình 4 bước chuẩn hóa thông tin trước khi một điểm di sản được ghim lên hệ thống.</p>
         </div>
         <div class="timeline">
-            <div class="t-item reveal left"><span class="year">Bước 1</span><h3>Chọn địa điểm</h3><p>Cả lớp liệt kê các di tích, công trình, làng nghề tại địa phương.</p></div>
-            <div class="t-item reveal right"><span class="year">Bước 2</span><h3>Sưu tầm tư liệu</h3><p>Chụp ảnh, phỏng vấn người dân và tra cứu tài liệu đáng tin cậy.</p></div>
-            <div class="t-item reveal left"><span class="year">Bước 3</span><h3>Kiểm chứng</h3><p>Đối chiếu thông tin với cơ quan quản lý di sản và sách lịch sử.</p></div>
-            <div class="t-item reveal right"><span class="year">Bước 4</span><h3>Ghim lên bản đồ</h3><p>Gắn vị trí, hình ảnh và câu chuyện vào bản đồ chung của lớp.</p></div>
+            <div class="t-item reveal left">
+                <div class="t-card">
+                    <span class="year">Bước 01 · Khảo sát</span>
+                    <h3>Lập danh sách địa danh</h3>
+                    <p>Cả lớp cùng rà soát các đình làng, di tích lịch sử, thắng cảnh và làng nghề thủ công tiêu biểu tại quê hương.</p>
+                </div>
+            </div>
+            <div class="t-item reveal right">
+                <div class="t-card">
+                    <span class="year">Bước 02 · Điền dã</span>
+                    <h3>Sưu tầm tư liệu &amp; Phỏng vấn</h3>
+                    <p>Trực tiếp đến chụp ảnh thực tế, lắng nghe câu chuyện từ người dân địa phương và thu thập tài liệu thư viện.</p>
+                </div>
+            </div>
+            <div class="t-item reveal left">
+                <div class="t-card">
+                    <span class="year">Bước 03 · Kiểm chứng</span>
+                    <h3>Đối chiếu sử liệu</h3>
+                    <p>So sánh niên đại, sự kiện với cổng thông tin của Cục Di sản Văn hóa và sách lịch sử địa phương chính thống.</p>
+                </div>
+            </div>
+            <div class="t-item reveal right">
+                <div class="t-card">
+                    <span class="year">Bước 04 · Số hóa</span>
+                    <h3>Ghim tọa độ &amp; Xuất bản</h3>
+                    <p>Định vị tọa độ GPS lên OpenStreetMap, biên tập bài viết súc tích và mở cổng đón nhận đóng góp cộng đồng.</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -68,33 +110,72 @@
     <div class="container">
         <div class="section-heading">
             <p class="eyebrow reveal">CÂU HỎI THƯỜNG GẶP</p>
-            <h2 class="reveal">Bạn muốn biết thêm?</h2>
+            <h2 class="reveal">Giải đáp thắc mắc về dự án</h2>
         </div>
         <div class="accordion">
-            <div class="acc-item reveal"><button class="acc-btn" aria-expanded="false">Ai có thể tham gia dự án?</button><div class="acc-panel"><p>Bất kỳ ai yêu quê hương: học sinh, thầy cô, phụ huynh và người dân địa phương.</p></div></div>
-            <div class="acc-item reveal" style="--d:.08s"><button class="acc-btn" aria-expanded="false">Tôi cần chuẩn bị gì để đóng góp?</button><div class="acc-panel"><p>Tên và địa chỉ địa điểm, loại hình di sản, hình ảnh bạn chụp hoặc có quyền sử dụng, cùng câu chuyện và nguồn tham khảo.</p></div></div>
-            <div class="acc-item reveal" style="--d:.16s"><button class="acc-btn" aria-expanded="false">Thông tin có được kiểm chứng không?</button><div class="acc-panel"><p>Mỗi câu chuyện cần ghi rõ nguồn và được đối chiếu với tư liệu chính thống trước khi đăng.</p></div></div>
+            <div class="acc-item reveal">
+                <button class="acc-btn" aria-expanded="false">Ai có thể tham gia đóng góp cho Bản Đồ Di Sản Quê Mình?</button>
+                <div class="acc-panel"><p>Bất kỳ ai yêu mến văn hóa Việt Nam: các bạn học sinh, sinh viên, thầy cô giáo, phụ huynh và người dân địa phương trên khắp cả nước đều có thể gửi bài viết và hình ảnh.</p></div>
+            </div>
+            <div class="acc-item reveal" style="--d:.08s">
+                <button class="acc-btn" aria-expanded="false">Tôi cần chuẩn bị những gì trước khi gửi một địa điểm mới?</button>
+                <div class="acc-panel"><p>Bạn chỉ cần chuẩn bị: Tên chính xác của di sản, địa chỉ (xã/phường, tỉnh/thành), phân loại di sản, đường dẫn hình ảnh chụp thực tế và câu chuyện lịch sử kèm nguồn trích dẫn.</p></div>
+            </div>
+            <div class="acc-item reveal" style="--d:.16s">
+                <button class="acc-btn" aria-expanded="false">Thông tin do người dùng đóng góp được kiểm duyệt như thế nào?</button>
+                <div class="acc-panel"><p>Ở phiên bản trải nghiệm trực tuyến này, đóng góp của bạn sẽ được lưu trữ ngay trên trình duyệt để xem trước. Khi đưa vào kho dữ liệu chính thức, ban biên tập sẽ đối chiếu nguồn sử liệu trước khi xuất bản.</p></div>
+            </div>
+            <div class="acc-item reveal" style="--d:.24s">
+                <button class="acc-btn" aria-expanded="false">Tôi có thể sử dụng tư liệu trên website cho bài thuyết trình trên lớp không?</button>
+                <div class="acc-panel"><p>Hoàn toàn được! Dự án hướng tới mục tiêu giáo dục mở và phi lợi nhuận. Bạn có thể trích dẫn nội dung kèm nguồn tham khảo cho các bài tập lịch sử, địa lý và giáo dục địa phương.</p></div>
+            </div>
         </div>
     </div>
 </section>
 </main>
 
 <section class="closing">
-    <p class="eyebrow reveal">DI SẢN LÀ KÝ ỨC</p>
-    <h2 class="reveal" style="--d:.1s">Cùng viết tiếp câu chuyện di sản</h2>
-    <a href="dong-gop.html" class="btn btn-primary reveal" style="--d:.2s">Tham gia đóng góp →</a>
+    <p class="eyebrow reveal">ĐỒNG HÀNH CÙNG DỰ ÁN</p>
+    <h2 class="reveal" style="--d:.1s">Cùng viết tiếp câu chuyện di sản quê hương</h2>
+    <a href="dong-gop.html" class="btn btn-primary reveal" style="--d:.2s">Tham gia đóng góp ngay →</a>
 </section>
 
 <footer class="footer">
     <div class="footer-grid">
         <div>
-            <a href="index.html" class="logo">DI SẢN<span>.</span></a>
-            <p>Dự án học sinh “Bản Đồ Di Sản Quê Mình” – khám phá quê hương bằng tri thức và sự sẻ chia.</p>
+            <a href="index.html" class="logo"><span class="logo-mark">🏮</span>DI SẢN<span>.</span></a>
+            <p>Dự án học sinh “Bản Đồ Di Sản Quê Mình” – số hóa, kết nối và lan tỏa tình yêu văn hóa lịch sử Việt Nam bằng tri thức trẻ.</p>
         </div>
-        <div><h4>TRANG</h4><ul><li><a href="index.html">Trang chủ</a></li><li><a href="gioi-thieu.html">Giới thiệu</a></li><li><a href="ban-do.html">Bản đồ</a></li><li><a href="di-san.html">Di sản</a></li><li><a href="cau-chuyen.html">Câu chuyện</a></li><li><a href="dong-gop.html">Đóng góp</a></li></ul></div>
-        <div><h4>LIÊN HỆ</h4><ul><li>Lớp dự án Di sản</li><li>Email: disan@example.com</li><li>Bản demo học tập</li></ul></div>
+        <div>
+            <h4>ĐIỀU HƯỚNG</h4>
+            <ul>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="gioi-thieu.html">Giới thiệu dự án</a></li>
+                <li><a href="ban-do.html">Bản đồ tương tác</a></li>
+                <li><a href="di-san.html">Kho tư liệu di sản</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>CHUYÊN MỤC</h4>
+            <ul>
+                <li><a href="cau-chuyen.html">Câu chuyện lịch sử</a></li>
+                <li><a href="thu-vien.html">Thư viện &amp; Lễ hội</a></li>
+                <li><a href="dong-gop.html">Đóng góp cộng đồng</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>THÔNG TIN LIÊN HỆ</h4>
+            <ul>
+                <li>📍 Nhóm Dự án Di sản Học đường</li>
+                <li>✉️ Email: disanqueminh@edu.vn</li>
+                <li>🌐 Phiên bản Web Sáng tạo 2026</li>
+            </ul>
+        </div>
     </div>
-    <div class="copy"><span>© 2026 Bản Đồ Di Sản Quê Mình</span><span>Làm bằng HTML · CSS · JavaScript</span></div>
+    <div class="copy">
+        <span>© 2026 Bản Đồ Di Sản Quê Mình. Bảo lưu mọi quyền.</span>
+        <span>Thiết kế sáng tạo với HTML5 · CSS3 · JavaScript</span>
+    </div>
 </footer>
 <button class="to-top" aria-label="Lên đầu trang">↑</button>
 <div class="toast" role="status" aria-live="polite"></div>

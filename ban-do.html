@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bản đồ tương tác các địa điểm di sản tiêu biểu của Việt Nam.">
+    <meta name="description" content="Bản đồ tương tác các địa điểm di sản tiêu biểu khắp 3 miền Việt Nam.">
     <title>Bản đồ | Bản Đồ Di Sản Quê Mình</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,87 +13,163 @@
 <body>
 <div class="progress" aria-hidden="true"></div>
 <header class="header">
-    <a href="index.html" class="logo">DI SẢN<span>.</span></a>
-    <button class="burger" aria-label="Mở menu" aria-expanded="false" aria-controls="nav"><span></span></button>
+    <a href="index.html" class="logo"><span class="logo-mark">🏮</span>DI SẢN<span>.</span></a>
     <nav class="nav" id="nav">
-            <a href="index.html">Trang chủ</a>
-            <a href="gioi-thieu.html">Giới thiệu</a>
-            <a href="ban-do.html" class="active" aria-current="page">Bản đồ</a>
-            <a href="di-san.html">Di sản</a>
-            <a href="cau-chuyen.html">Câu chuyện</a>
-            <a href="dong-gop.html" class="nav-cta">Đóng góp</a>
+        <a href="index.html">Trang chủ</a>
+        <a href="gioi-thieu.html">Giới thiệu</a>
+        <a href="ban-do.html" class="active" aria-current="page">Bản đồ</a>
+        <a href="di-san.html">Di sản</a>
+        <a href="cau-chuyen.html">Câu chuyện</a>
+        <a href="thu-vien.html">Thư viện &amp; Lễ hội</a>
+        <a href="dong-gop.html" class="nav-cta">Đóng góp</a>
     </nav>
+    <div class="header-actions">
+        <button class="theme-toggle" type="button" aria-label="Đổi giao diện Sáng/Tối">🌙</button>
+        <button class="burger" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="nav"><span></span></button>
+    </div>
 </header>
+
 <section class="page-hero">
     <span class="orb o1"></span><span class="orb o2"></span>
     <div class="container">
-        <p class="crumbs"><a href="index.html">Trang chủ</a> / Bản đồ</p>
-        <h1 class="reveal">Bản đồ khám phá</h1>
-        <p class="sub reveal" style="--d:.15s">Chọn một địa điểm để bản đồ di chuyển tới vị trí đó.</p>
+        <p class="crumbs"><a href="index.html">Trang chủ</a> <span>/</span> Bản đồ</p>
+        <h1 class="reveal">Bản đồ số khám phá di sản</h1>
+        <p class="sub reveal" style="--d:.15s">Lọc theo vùng miền và chọn một địa danh để bản đồ định vị trực tiếp tới tọa độ thực tế.</p>
     </div>
 </section>
 
 <main>
 <section class="section">
     <div class="container">
+        <div class="map-filter-bar reveal">
+            <button type="button" class="chip active" data-region="all">🌏 Toàn quốc (8)</button>
+            <button type="button" class="chip" data-region="bac">🏔️ Miền Bắc (4)</button>
+            <button type="button" class="chip" data-region="trung">🏮 Miền Trung (3)</button>
+            <button type="button" class="chip" data-region="nam">🌴 Miền Nam (1)</button>
+        </div>
+
         <div class="map-layout">
             <div class="map-list reveal left">
-                <button class="map-item active" aria-pressed="true" data-lat="15.8801" data-lon="108.338" data-zoom="0.02" data-name="Phố cổ Hội An" data-desc="Thương cảng quốc tế sầm uất một thời.">
-                    <span class="num">01</span><span><h4>Phố cổ Hội An</h4><small>Thương cảng quốc tế sầm uất một thời.</small></span>
+                <button class="map-item active" aria-pressed="true" data-region="trung" data-lat="15.8801" data-lon="108.3380" data-zoom="0.02" data-name="Phố cổ Hội An (Quảng Nam)" data-desc="Thương cảng quốc tế sầm uất thế kỷ XVI–XIX bên dòng sông Hoài." data-story="cau-chuyen.html#hoi-an">
+                    <span class="num">01</span>
+                    <span><h4>Phố cổ Hội An</h4><small>📍 Quảng Nam · Di sản văn hóa</small></span>
                 </button>
-                <button class="map-item" aria-pressed="false" data-lat="16.4698" data-lon="107.5786" data-zoom="0.03" data-name="Hoàng thành Huế" data-desc="Kinh đô cuối cùng của triều Nguyễn.">
-                    <span class="num">02</span><span><h4>Hoàng thành Huế</h4><small>Kinh đô cuối cùng của triều Nguyễn.</small></span>
+                <button class="map-item" aria-pressed="false" data-region="trung" data-lat="16.4698" data-lon="107.5786" data-zoom="0.025" data-name="Quần thể Cố đô Huế" data-desc="Kinh đô cuối cùng của triều Nguyễn với kiến trúc cung đình kiệt xuất." data-story="cau-chuyen.html#hue">
+                    <span class="num">02</span>
+                    <span><h4>Hoàng thành Huế</h4><small>📍 Thừa Thiên Huế · Di tích lịch sử</small></span>
                 </button>
-                <button class="map-item" aria-pressed="false" data-lat="20.9101" data-lon="107.1839" data-zoom="0.12" data-name="Vịnh Hạ Long" data-desc="Kỳ quan với hàng nghìn đảo đá vôi.">
-                    <span class="num">03</span><span><h4>Vịnh Hạ Long</h4><small>Kỳ quan với hàng nghìn đảo đá vôi.</small></span>
+                <button class="map-item" aria-pressed="false" data-region="bac" data-lat="20.9101" data-lon="107.1839" data-zoom="0.12" data-name="Vịnh Hạ Long (Quảng Ninh)" data-desc="Kỳ quan thiên nhiên thế giới với gần 2.000 đảo đá vôi kỳ vĩ." data-story="cau-chuyen.html#ha-long">
+                    <span class="num">03</span>
+                    <span><h4>Vịnh Hạ Long</h4><small>📍 Quảng Ninh · Thắng cảnh thiên nhiên</small></span>
                 </button>
-                <button class="map-item" aria-pressed="false" data-lat="15.764" data-lon="108.124" data-zoom="0.03" data-name="Thánh địa Mỹ Sơn" data-desc="Cụm đền tháp Chăm Pa cổ.">
-                    <span class="num">04</span><span><h4>Thánh địa Mỹ Sơn</h4><small>Cụm đền tháp Chăm Pa cổ.</small></span>
+                <button class="map-item" aria-pressed="false" data-region="trung" data-lat="15.7640" data-lon="108.1240" data-zoom="0.025" data-name="Thánh địa Mỹ Sơn (Quảng Nam)" data-desc="Quần thể đền tháp Chăm Pa cổ kính ẩn mình trong thung lũng." data-story="cau-chuyen.html#my-son">
+                    <span class="num">04</span>
+                    <span><h4>Thánh địa Mỹ Sơn</h4><small>📍 Quảng Nam · Kiến trúc cổ Chăm Pa</small></span>
                 </button>
-                <button class="map-item" aria-pressed="false" data-lat="21.0286" data-lon="105.8355" data-zoom="0.02" data-name="Văn Miếu – Quốc Tử Giám" data-desc="Trường đại học đầu tiên của Việt Nam.">
-                    <span class="num">05</span><span><h4>Văn Miếu – Quốc Tử Giám</h4><small>Trường đại học đầu tiên của Việt Nam.</small></span>
+                <button class="map-item" aria-pressed="false" data-region="bac" data-lat="21.0286" data-lon="105.8355" data-zoom="0.015" data-name="Văn Miếu – Quốc Tử Giám (Hà Nội)" data-desc="Trường đại học đầu tiên của Việt Nam, biểu tượng hiếu học ngàn năm." data-story="cau-chuyen.html#van-mieu">
+                    <span class="num">05</span>
+                    <span><h4>Văn Miếu – Quốc Tử Giám</h4><small>📍 Hà Nội · Kiến trúc &amp; Giáo dục</small></span>
                 </button>
-                <button class="map-item" aria-pressed="false" data-lat="20.9763" data-lon="105.9144" data-zoom="0.03" data-name="Làng gốm Bát Tràng" data-desc="Làng gốm hơn 700 năm tuổi.">
-                    <span class="num">06</span><span><h4>Làng gốm Bát Tràng</h4><small>Làng gốm hơn 700 năm tuổi.</small></span>
+                <button class="map-item" aria-pressed="false" data-region="bac" data-lat="20.9763" data-lon="105.9144" data-zoom="0.025" data-name="Làng gốm Bát Tràng (Hà Nội)" data-desc="Làng nghề gốm sứ truyền thống hơn 700 năm tuổi bên sông Hồng." data-story="cau-chuyen.html#bat-trang">
+                    <span class="num">06</span>
+                    <span><h4>Làng gốm Bát Tràng</h4><small>📍 Gia Lâm, Hà Nội · Làng nghề</small></span>
+                </button>
+                <button class="map-item" aria-pressed="false" data-region="bac" data-lat="20.2506" data-lon="105.8972" data-zoom="0.06" data-name="Quần thể danh thắng Tràng An" data-desc="Di sản kép văn hóa và thiên nhiên thế giới tại cố đô Hoa Lư." data-story="cau-chuyen.html#ha-long">
+                    <span class="num">07</span>
+                    <span><h4>Danh thắng Tràng An</h4><small>📍 Ninh Bình · Di sản hỗn hợp</small></span>
+                </button>
+                <button class="map-item" aria-pressed="false" data-region="nam" data-lat="11.1416" data-lon="106.4625" data-zoom="0.03" data-name="Khu di tích Địa đạo Củ Chi" data-desc="Hệ thống đường hầm phòng thủ kiên cường dài hơn 200km trong lòng đất." data-story="cau-chuyen.html">
+                    <span class="num">08</span>
+                    <span><h4>Địa đạo Củ Chi</h4><small>📍 TP. Hồ Chí Minh · Di tích lịch sử</small></span>
                 </button>
             </div>
+
             <div class="map-container reveal right">
                 <iframe id="map-frame" title="Bản đồ khám phá di sản Việt Nam" loading="lazy"
                     src="https://www.openstreetmap.org/export/embed.html?bbox=108.318%2C15.868%2C108.358%2C15.892&layer=mapnik&marker=15.8801%2C108.3380"></iframe>
-                <p class="map-caption"><b id="map-name">Phố cổ Hội An</b> – <span id="map-desc">Thương cảng quốc tế sầm uất một thời.</span></p>
+                <div class="map-caption">
+                    <div class="map-caption-info">
+                        <b id="map-name">Phố cổ Hội An (Quảng Nam)</b>
+                        <span id="map-desc">Thương cảng quốc tế sầm uất thế kỷ XVI–XIX bên dòng sông Hoài.</span>
+                    </div>
+                    <div class="map-caption-actions">
+                        <a id="map-story" href="cau-chuyen.html#hoi-an" class="btn btn-dark btn-sm">Câu chuyện</a>
+                        <a id="map-gmap" href="https://www.google.com/maps/search/?api=1&query=15.8801,108.3380" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Mở Google Maps ↗</a>
+                    </div>
+                </div>
             </div>
         </div>
-        <p class="lead reveal" style="margin:36px auto 0;text-align:center;font-size:14px">Bản đồ do OpenStreetMap cung cấp. Vị trí di sản của riêng lớp có thể được bổ sung ở trang <a href="dong-gop.html" class="text-link">Đóng góp</a>.</p>
+        <p class="lead reveal" style="margin:34px auto 0;text-align:center;font-size:14px">
+            Dữ liệu bản đồ được cung cấp bởi OpenStreetMap. Bạn muốn bổ sung tọa độ di sản nơi mình sống? Hãy ghé trang <a href="dong-gop.html" class="text-link">Đóng góp cộng đồng →</a>
+        </p>
     </div>
 </section>
 
 <section class="section alt">
     <div class="container">
         <div class="features">
-            <div class="feature reveal"><div class="icon">🏯</div><h3>Di tích lịch sử</h3><p>Những dấu mốc của quá khứ.</p></div>
-            <div class="feature reveal" style="--d:.12s"><div class="icon">🛕</div><h3>Công trình văn hóa</h3><p>Đình, chùa và kiến trúc truyền thống.</p></div>
-            <div class="feature reveal" style="--d:.24s"><div class="icon">🏺</div><h3>Làng nghề</h3><p>Nơi lưu giữ kỹ năng và bản sắc địa phương.</p></div>
+            <div class="feature reveal">
+                <div class="icon">🏯</div>
+                <h3>Di tích lịch sử</h3>
+                <p>Những thành cổ, chiến khu và dấu mốc khắc họa chặng đường dựng nước và giữ nước.</p>
+            </div>
+            <div class="feature reveal" style="--d:.12s">
+                <div class="icon">🛕</div>
+                <h3>Kiến trúc &amp; Văn hóa</h3>
+                <p>Đình làng, chùa tháp và đô thị cổ phản ánh mỹ thuật, tín ngưỡng của người Việt qua các triều đại.</p>
+            </div>
+            <div class="feature reveal" style="--d:.24s">
+                <div class="icon">🏺</div>
+                <h3>Làng nghề truyền thống</h3>
+                <p>Nơi những nghệ nhân giữ lửa nghề gốm, dệt lụa, đúc đồng và truyền dạy qua bao thế hệ.</p>
+            </div>
         </div>
     </div>
 </section>
 </main>
 
 <section class="closing">
-    <p class="eyebrow reveal">DI SẢN LÀ KÝ ỨC</p>
+    <p class="eyebrow reveal">MỞ RỘNG BẢN ĐỒ</p>
     <h2 class="reveal" style="--d:.1s">Địa điểm quê bạn chưa có trên bản đồ?</h2>
-    <a href="dong-gop.html" class="btn btn-primary reveal" style="--d:.2s">Thêm di sản của bạn →</a>
+    <a href="dong-gop.html" class="btn btn-primary reveal" style="--d:.2s">Ghim di sản của bạn ngay →</a>
 </section>
 
 <footer class="footer">
     <div class="footer-grid">
         <div>
-            <a href="index.html" class="logo">DI SẢN<span>.</span></a>
-            <p>Dự án học sinh “Bản Đồ Di Sản Quê Mình” – khám phá quê hương bằng tri thức và sự sẻ chia.</p>
+            <a href="index.html" class="logo"><span class="logo-mark">🏮</span>DI SẢN<span>.</span></a>
+            <p>Dự án học sinh “Bản Đồ Di Sản Quê Mình” – số hóa, kết nối và lan tỏa tình yêu văn hóa lịch sử Việt Nam bằng tri thức trẻ.</p>
         </div>
-        <div><h4>TRANG</h4><ul><li><a href="index.html">Trang chủ</a></li><li><a href="gioi-thieu.html">Giới thiệu</a></li><li><a href="ban-do.html">Bản đồ</a></li><li><a href="di-san.html">Di sản</a></li><li><a href="cau-chuyen.html">Câu chuyện</a></li><li><a href="dong-gop.html">Đóng góp</a></li></ul></div>
-        <div><h4>LIÊN HỆ</h4><ul><li>Lớp dự án Di sản</li><li>Email: disan@example.com</li><li>Bản demo học tập</li></ul></div>
+        <div>
+            <h4>ĐIỀU HƯỚNG</h4>
+            <ul>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="gioi-thieu.html">Giới thiệu dự án</a></li>
+                <li><a href="ban-do.html">Bản đồ tương tác</a></li>
+                <li><a href="di-san.html">Kho tư liệu di sản</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>CHUYÊN MỤC</h4>
+            <ul>
+                <li><a href="cau-chuyen.html">Câu chuyện lịch sử</a></li>
+                <li><a href="thu-vien.html">Thư viện &amp; Lễ hội</a></li>
+                <li><a href="dong-gop.html">Đóng góp cộng đồng</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>THÔNG TIN LIÊN HỆ</h4>
+            <ul>
+                <li>📍 Nhóm Dự án Di sản Học đường</li>
+                <li>✉️ Email: disanqueminh@edu.vn</li>
+                <li>🌐 Phiên bản Web Sáng tạo 2026</li>
+            </ul>
+        </div>
     </div>
-    <div class="copy"><span>© 2026 Bản Đồ Di Sản Quê Mình</span><span>Làm bằng HTML · CSS · JavaScript</span></div>
+    <div class="copy">
+        <span>© 2026 Bản Đồ Di Sản Quê Mình. Bảo lưu mọi quyền.</span>
+        <span>Thiết kế sáng tạo với HTML5 · CSS3 · JavaScript</span>
+    </div>
 </footer>
 <button class="to-top" aria-label="Lên đầu trang">↑</button>
 <div class="toast" role="status" aria-live="polite"></div>
