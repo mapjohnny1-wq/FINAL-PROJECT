@@ -668,25 +668,51 @@
         });
     }
 
-    /* 18. Hệ thống Scroll Parallax Đột Phá (ERA Residence + 3D Stack + Scrub Text + Kinetic Ribbons) */
+    /* 18. Hệ thống Scroll Parallax Đột Phá (Lerp Inertia 120fps + GPU Clip-Path + Split Curtain + Velocity Skew) */
     var heroBg = $('.hero-bg-parallax');
+    var heroSunburst = $('#hero-sunburst');
     var heroGiant = $('#hero-giant-text');
+    var heroContentP = $('#hero-content-parallax');
+    var heroCardsP = $('#hero-cards-parallax');
     var speedEls = $$('[data-speed]');
+
     var portalSec = $('#portal-showcase');
+    var portalHeader = $('#portal-header');
     var portalArch = $('#portal-arch');
     var portalImg = $('#portal-img');
+    var portalCaption = $('#portal-caption');
     var portalWordL = $('#portal-word-left'), portalWordR = $('#portal-word-right');
     var portalCardL = $('#portal-card-left'), portalCardR = $('#portal-card-right');
-    var kineticR1 = $('#kinetic-r1'), kineticR2 = $('#kinetic-r2');
+    var portalPillTR = $('#portal-pill-tr'), portalPillBL = $('#portal-pill-bl');
+
+    var kineticR1 = $('#kinetic-r1'), kineticR2 = $('#kinetic-r2'), kineticR3 = $('#kinetic-r3');
+
+    var curtainSec = $('#curtain-showcase');
+    var curtainL = $('#curtain-left'), curtainR = $('#curtain-right');
+    var curtainBgImg = $('#curtain-bg-img');
+    var curtainCenter = $('#curtain-center');
+    var curtainFloatL = $('#curtain-float-l'), curtainFloatR = $('#curtain-float-r');
+
     var hscrollSec = $('#hscroll-showcase');
     var hscrollTrack = $('#hscroll-track');
+    var hscrollWatermark = $('#hscroll-watermark');
     var hscrollIdx = $('#hscroll-index');
     var hscrollFill = $('#hscroll-fill');
+    var hscrollSlides = $$('.hscroll-slide');
     var hscrollImgs = $$('.hscroll-slide-img img');
+
     var stackCards = $$('.stack-card');
     var scrubSec = $('#scrub-manifesto');
     var scrubTextEl = $('#scrub-text');
     var scrubWords = [];
+    var cardImgs = $$('.heritage-card .card-img img');
+
+    var hudWheel = $('#hud-wheel');
+    var hudPct = $('#hud-pct');
+    var hudDots = $$('.hud-dot');
+    var hudSections = ['#home', '#portal-showcase', '#curtain-showcase', '#hscroll-showcase', '#stack-showcase', '#scrub-manifesto'].map(function (id) {
+        return $(id);
+    });
 
     /* Khởi tạo tách từng từ cho Tuyên ngôn Chữ sáng dần theo nhịp cuộn */
     if (scrubTextEl) {
@@ -700,168 +726,340 @@
         scrubWords = $$('.scrub-word', scrubTextEl);
     }
 
-    /* Chuyển đổi sắc thái Ngày / Đêm ngay trên Cổng Vòm */
+    /* Chuyển đổi 3 sắc thái Bình Minh / Hoàng Hôn / Đêm Phố Cổ trên Cổng Vòm */
     var moodBtns = $$('.mood-btn');
     if (moodBtns.length) {
+        var MOOD_DATA = {
+            day: {
+                dark: false,
+                img: 'https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1920&q=85',
+                coords: '16°28\'11"N · 107°34\'43"E · KINH ĐÔ CỔ HUẾ',
+                tag: 'KIẾN TRÚC CUNG ĐÌNH & ĐÔ THỊ CỔ',
+                title: 'Vẻ đẹp trường tồn qua hàng thế kỷ',
+                desc: 'Cuộn chuột xuống để mở rộng khung vòm kiến trúc toàn màn hình và cảm nhận hiệu ứng chiều sâu không gian đa lớp.'
+            },
+            sunset: {
+                dark: false,
+                img: 'https://images.unsplash.com/photo-1573270689103-d7a4e42b609a?auto=format&fit=crop&w=1920&q=85',
+                coords: '15°45\'52"N · 108°07\'29"E · THÁNH ĐỊA MỸ SƠN',
+                tag: 'HOÀNG HÔN TRÊN THUNG LŨNG ĐỀN THÁP',
+                title: 'Sắc gạch nung rực lửa giữa đại ngàn',
+                desc: 'Ánh hoàng hôn nhuộm đỏ những cụm đền tháp Chăm Pa hơn nghìn năm tuổi ẩn mình trong lòng thung lũng.'
+            },
+            night: {
+                dark: true,
+                img: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1920&q=85',
+                coords: '15°52\'46"N · 108°19\'41"E · PHỐ CỔ HỘI AN',
+                tag: 'ĐÊM HỘI HOA ĐĂNG · HỘI AN',
+                title: 'Lung linh sắc vàng đêm phố cổ',
+                desc: 'Khi màn đêm buông xuống, hàng nghìn chiếc đèn lồng thắp sáng dòng sông Hoài tạo nên bức tranh di sản huyền ảo.'
+            }
+        };
+
         moodBtns.forEach(function (mBtn) {
             mBtn.addEventListener('click', function () {
                 moodBtns.forEach(function (b) { b.classList.remove('active'); });
                 mBtn.classList.add('active');
-                var mood = mBtn.getAttribute('data-mood');
-                var isNight = mood === 'night';
-                if (isNight) document.documentElement.setAttribute('data-theme', 'dark');
+                var moodKey = mBtn.getAttribute('data-mood') || 'day';
+                var cfg = MOOD_DATA[moodKey] || MOOD_DATA.day;
+
+                if (cfg.dark) document.documentElement.setAttribute('data-theme', 'dark');
                 else document.documentElement.removeAttribute('data-theme');
-                try { localStorage.setItem('disan-theme', isNight ? 'dark' : 'light'); } catch (e) {}
+                try { localStorage.setItem('disan-theme', cfg.dark ? 'dark' : 'light'); } catch (e) {}
                 $$('.theme-toggle').forEach(updateThemeBtn);
 
-                var pTitle = $('#portal-title'), pDesc = $('#portal-desc'), pTag = $('#portal-tag');
-                if (portalImg) {
-                    portalImg.src = isNight
-                        ? 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1920&q=85'
-                        : 'https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1920&q=85';
-                }
-                if (pTag) pTag.textContent = isNight ? 'ĐÊM HỘI HOA ĐĂNG · HỘI AN' : 'KIẾN TRÚC CUNG ĐÌNH & ĐÔ THỊ CỔ';
-                if (pTitle) pTitle.textContent = isNight ? 'Lung linh sắc vàng đêm phố cổ' : 'Vẻ đẹp trường tồn qua hàng thế kỷ';
-                if (pDesc) pDesc.textContent = isNight
-                    ? 'Khi màn đêm buông xuống, hàng nghìn chiếc đèn lồng thắp sáng dòng sông Hoài tạo nên bức tranh di sản huyền ảo.'
-                    : 'Cuộn chuột xuống để mở rộng khung vòm kiến trúc và chuyển đổi giữa sắc nắng bình minh cùng đêm hội hoa đăng.';
+                var pTitle = $('#portal-title'), pDesc = $('#portal-desc'), pTag = $('#portal-tag'), pCoords = $('#portal-coords');
+                if (portalImg) portalImg.src = cfg.img;
+                if (pCoords) pCoords.textContent = cfg.coords;
+                if (pTag) pTag.textContent = cfg.tag;
+                if (pTitle) pTitle.textContent = cfg.title;
+                if (pDesc) pDesc.textContent = cfg.desc;
             });
         });
     }
 
     if (!reduce) {
-        var ticking = false;
-        function updateParallax() {
-            ticking = false;
-            var sy = window.scrollY || window.pageYOffset;
-            var vh = window.innerHeight;
-            var vw = window.innerWidth;
+        var targetScrollY = window.scrollY || window.pageYOffset || 0;
+        var smoothScrollY = targetScrollY;
+        var scrollVel = 0;
+        var rafId = null;
 
-            /* a) Hero Background Zoom + Chữ khổng lồ trôi ngang */
-            if (sy < vh * 1.5) {
-                if (heroBg) {
-                    var heroScale = 1 + (sy * 0.0002);
-                    heroBg.style.transform = 'translate3d(0, ' + (sy * 0.34) + 'px, 0) scale(' + heroScale + ')';
-                }
-                if (heroGiant) {
-                    heroGiant.style.transform = 'translate3d(' + (-sy * 0.42) + 'px, 0, 0)';
+        function clamp(v, min, max) {
+            return Math.max(min, Math.min(max, v));
+        }
+
+        function renderParallaxFrame() {
+            rafId = null;
+            targetScrollY = window.scrollY || window.pageYOffset || 0;
+            var diff = targetScrollY - smoothScrollY;
+
+            /* Nội suy mượt (Lerp Inertia) giúp hiệu ứng cuộn chuột bánh răng mượt như lụa */
+            if (Math.abs(diff) > 0.12) {
+                smoothScrollY += diff * 0.11;
+                scrollVel = diff * 0.11;
+                rafId = requestAnimationFrame(renderParallaxFrame);
+            } else {
+                smoothScrollY = targetScrollY;
+                scrollVel *= 0.7;
+                if (Math.abs(scrollVel) > 0.15) {
+                    rafId = requestAnimationFrame(renderParallaxFrame);
+                } else {
+                    scrollVel = 0;
                 }
             }
 
-            /* b) Các phần tử có thuộc tính data-speed dịch chuyển đa tầng */
+            var sy = smoothScrollY;
+            var scrollOffsetDelta = sy - targetScrollY;
+            var vh = window.innerHeight;
+            var vw = window.innerWidth;
+            var clampVel = clamp(scrollVel, -28, 28);
+
+            /* 0) Cập nhật HUD La bàn Cuộn nổi bên phải */
+            if (hudWheel || hudPct) {
+                var docMax = Math.max(1, document.documentElement.scrollHeight - vh);
+                var pct = clamp(Math.round((sy / docMax) * 100), 0, 100);
+                if (hudPct) hudPct.textContent = (pct < 10 ? '0' : '') + pct + '%';
+                if (hudWheel) hudWheel.style.transform = 'rotate(' + (sy * 0.24).toFixed(1) + 'deg)';
+                if (hudDots.length) {
+                    var activeIdx = 0;
+                    for (var hi = 0; hi < hudSections.length; hi++) {
+                        var hSec = hudSections[hi];
+                        if (hSec && hSec.getBoundingClientRect().top <= vh * 0.45) {
+                            activeIdx = hi;
+                        }
+                    }
+                    for (var hd = 0; hd < hudDots.length; hd++) {
+                        hudDots[hd].classList.toggle('active', hd === activeIdx);
+                    }
+                }
+            }
+
+            /* a) Hero 5-Plane Parallax (Background Zoom + Vòng Mặt Trời Đông Sơn + Chữ Khổng Lồ + Nội Dung) */
+            if (sy < vh * 1.6) {
+                if (heroBg) {
+                    var heroScale = 1 + (sy * 0.00028);
+                    heroBg.style.transform = 'translate3d(0, ' + (sy * 0.44).toFixed(1) + 'px, 0) scale(' + heroScale.toFixed(4) + ')';
+                }
+                if (heroSunburst) {
+                    heroSunburst.style.transform = 'translate3d(0, ' + (sy * 0.22).toFixed(1) + 'px, 0) rotate(' + (sy * 0.16).toFixed(1) + 'deg) scale(' + (1 + sy * 0.0003).toFixed(3) + ')';
+                }
+                if (heroGiant) {
+                    heroGiant.style.transform = 'translate3d(' + (-sy * 0.68).toFixed(1) + 'px, 0, 0) skewX(' + (-clampVel * 0.35).toFixed(2) + 'deg)';
+                }
+                if (vw > 920) {
+                    if (heroContentP) {
+                        heroContentP.style.transform = 'translate3d(0, ' + (-sy * 0.18).toFixed(1) + 'px, 0)';
+                    }
+                    if (heroCardsP) {
+                        heroCardsP.style.transform = 'translate3d(0, ' + (-sy * 0.34).toFixed(1) + 'px, 0) rotate(' + (sy * 0.008).toFixed(2) + 'deg)';
+                    }
+                }
+            }
+
+            /* b) Các phần tử [data-speed] dùng thuộc tính CSS `translate` độc lập (Không xung đột với .reveal / 3D Hover) */
             if (vw > 920) {
                 for (var i = 0; i < speedEls.length; i++) {
                     var el = speedEls[i];
                     var sp = parseFloat(el.getAttribute('data-speed')) || 0;
                     var rect = el.getBoundingClientRect();
-                    var centerOffset = (rect.top + rect.height / 2) - vh / 2;
-                    if (rect.bottom > -250 && rect.top < vh + 250) {
-                        el.style.transform = 'translate3d(0, ' + (centerOffset * sp) + 'px, 0)';
+                    var smoothTop = rect.top - scrollOffsetDelta;
+                    var centerOffset = (smoothTop + rect.height / 2) - vh / 2;
+                    if (rect.bottom > -320 && rect.top < vh + 320) {
+                        el.style.translate = '0px ' + (centerOffset * sp).toFixed(1) + 'px';
                     }
                 }
             }
 
-            /* c) Cổng Vòm Kiến Trúc Mở Rộng + Chữ Tách Đôi & Thẻ Phụ Trôi Dạt */
+            /* c) Cổng Vòm Kiến Trúc Mở Rộng Bằng GPU Clip-Path + 6 Lớp Vệ Tinh Bay Nổi */
             if (portalSec && portalArch && vw > 920) {
                 var pRect = portalSec.getBoundingClientRect();
+                var pTop = pRect.top - scrollOffsetDelta;
                 var totalScroll = portalSec.offsetHeight - vh;
-                if (totalScroll > 0) {
-                    var p = Math.max(0, Math.min(1, -pRect.top / totalScroll));
-                    var wPct = 46 + p * 48;
-                    var hPct = 56 + p * 30;
-                    var archRadius = Math.round(280 * (1 - p) + 24 * p);
-                    portalArch.style.width = wPct + 'vw';
-                    portalArch.style.height = hPct + 'vh';
-                    portalArch.style.borderRadius = archRadius + 'px ' + archRadius + 'px 24px 24px';
+                if (totalScroll > 0 && pRect.bottom > -200 && pRect.top < vh + 200) {
+                    var p = clamp(-pTop / totalScroll, 0, 1);
+                    var easedP = 1 - Math.pow(1 - p, 2.2);
+
+                    var insetTop = ((1 - easedP) * 10).toFixed(2);
+                    var insetSide = ((1 - easedP) * 24).toFixed(2);
+                    var insetBottom = ((1 - easedP) * 6).toFixed(2);
+                    var archRadius = Math.round(280 * (1 - easedP) + 22 * easedP);
+
+                    portalArch.style.clipPath = 'inset(' + insetTop + '% ' + insetSide + '% ' + insetBottom + '% ' + insetSide + '% round ' + archRadius + 'px ' + archRadius + 'px 26px 26px)';
+
                     if (portalImg) {
-                        portalImg.style.transform = 'translate3d(0, ' + (-12 + p * 12) + '%, 0) scale(' + (1.14 - p * 0.08) + ')';
+                        portalImg.style.transform = 'translate3d(0, ' + (-12 + easedP * 12).toFixed(2) + '%, 0) scale(' + (1.2 - easedP * 0.14).toFixed(3) + ')';
+                    }
+                    if (portalHeader) {
+                        portalHeader.style.transform = 'translate3d(0, ' + (-easedP * 40).toFixed(1) + 'px, 0)';
+                        portalHeader.style.opacity = String(clamp(1 - easedP * 1.4, 0, 1));
+                    }
+                    if (portalCaption) {
+                        portalCaption.style.transform = 'translate3d(0, ' + ((1 - easedP) * 28).toFixed(1) + 'px, 0)';
                     }
                     if (portalWordL) {
-                        portalWordL.style.transform = 'translate3d(' + (-p * 220) + 'px, -50%, 0)';
-                        portalWordL.style.opacity = String(1 - p * 0.85);
+                        portalWordL.style.transform = 'translate3d(' + (-easedP * 340).toFixed(1) + 'px, -50%, 0) scale(' + (1 + easedP * 0.12).toFixed(2) + ')';
+                        portalWordL.style.opacity = String(clamp(1 - easedP * 1.15, 0, 1));
                     }
                     if (portalWordR) {
-                        portalWordR.style.transform = 'translate3d(' + (p * 220) + 'px, -50%, 0)';
-                        portalWordR.style.opacity = String(1 - p * 0.85);
+                        portalWordR.style.transform = 'translate3d(' + (easedP * 340).toFixed(1) + 'px, -50%, 0) scale(' + (1 + easedP * 0.12).toFixed(2) + ')';
+                        portalWordR.style.opacity = String(clamp(1 - easedP * 1.15, 0, 1));
                     }
                     if (portalCardL) {
-                        portalCardL.style.transform = 'translate3d(' + (-p * 180) + 'px, ' + (-p * 90) + 'px, 0) rotate(' + (-6 - p * 8) + 'deg)';
-                        portalCardL.style.opacity = String(1 - p * 0.9);
+                        portalCardL.style.transform = 'translate3d(' + (-easedP * 260).toFixed(1) + 'px, ' + (-easedP * 110).toFixed(1) + 'px, 0) rotate(' + (-6 - easedP * 12).toFixed(1) + 'deg) scale(' + (1 - easedP * 0.1).toFixed(2) + ')';
+                        portalCardL.style.opacity = String(clamp(1 - easedP * 1.2, 0, 1));
                     }
                     if (portalCardR) {
-                        portalCardR.style.transform = 'translate3d(' + (p * 180) + 'px, ' + (p * 90) + 'px, 0) rotate(' + (6 + p * 8) + 'deg)';
-                        portalCardR.style.opacity = String(1 - p * 0.9);
+                        portalCardR.style.transform = 'translate3d(' + (easedP * 260).toFixed(1) + 'px, ' + (easedP * 110).toFixed(1) + 'px, 0) rotate(' + (6 + easedP * 12).toFixed(1) + 'deg) scale(' + (1 - easedP * 0.1).toFixed(2) + ')';
+                        portalCardR.style.opacity = String(clamp(1 - easedP * 1.2, 0, 1));
+                    }
+                    if (portalPillTR) {
+                        portalPillTR.style.transform = 'translate3d(' + (easedP * 200).toFixed(1) + 'px, ' + (-easedP * 80).toFixed(1) + 'px, 0)';
+                        portalPillTR.style.opacity = String(clamp(1 - easedP * 1.3, 0, 1));
+                    }
+                    if (portalPillBL) {
+                        portalPillBL.style.transform = 'translate3d(' + (-easedP * 200).toFixed(1) + 'px, ' + (easedP * 80).toFixed(1) + 'px, 0)';
+                        portalPillBL.style.opacity = String(clamp(1 - easedP * 1.3, 0, 1));
                     }
                 }
             }
 
-            /* d) Dải Chữ Kinetic Chạy Ngược Chiều Theo Tốc Độ Cuộn */
+            /* d) Dải Chữ Kinetic 3 Tầng Chạy Ngược Chiều & Nghiêng Theo Gia Tốc Cuộn */
             if (kineticR1 && kineticR2) {
                 var kRect = kineticR1.parentNode.getBoundingClientRect();
-                if (kRect.bottom > -200 && kRect.top < vh + 200) {
-                    var kShift = (vh - kRect.top) * 0.22;
-                    kineticR1.style.transform = 'translate3d(' + (-kShift) + 'px, 0, 0)';
-                    kineticR2.style.transform = 'translate3d(' + (kShift - 320) + 'px, 0, 0)';
-                }
-            }
-
-            /* e) Dải Trượt Ngang Khi Cuộn Dọc (Horizontal Scroll Gallery) */
-            if (hscrollSec && hscrollTrack && vw > 920) {
-                var hRect = hscrollSec.getBoundingClientRect();
-                var hTotal = hscrollSec.offsetHeight - vh;
-                if (hTotal > 0 && hRect.top <= vh && hRect.bottom >= 0) {
-                    var hp = Math.max(0, Math.min(1, -hRect.top / hTotal));
-                    var maxShift = Math.max(0, hscrollTrack.scrollWidth - vw + 80);
-                    hscrollTrack.style.transform = 'translate3d(' + (-hp * maxShift) + 'px, 0, 0)';
-                    var curSlide = Math.min(5, Math.max(1, Math.floor(hp * 5) + 1));
-                    if (hscrollIdx) hscrollIdx.textContent = '0' + curSlide;
-                    if (hscrollFill) hscrollFill.style.width = Math.max(20, hp * 100) + '%';
-                    for (var k = 0; k < hscrollImgs.length; k++) {
-                        hscrollImgs[k].style.transform = 'translate3d(' + (-12 + hp * 12) + '%, 0, 0) scale(1.06)';
+                var kTop = kRect.top - scrollOffsetDelta;
+                if (kRect.bottom > -250 && kRect.top < vh + 250) {
+                    var kShift = (vh - kTop) * 0.28;
+                    var skewDeg = clamp(clampVel * 0.38, -10, 10).toFixed(2);
+                    var invSkewDeg = (-clamp(clampVel * 0.38, -10, 10)).toFixed(2);
+                    kineticR1.style.transform = 'translate3d(' + (-kShift * 1.2).toFixed(1) + 'px, 0, 0) skewX(' + skewDeg + 'deg)';
+                    kineticR2.style.transform = 'translate3d(' + (kShift * 1.1 - 380).toFixed(1) + 'px, 0, 0) skewX(' + invSkewDeg + 'deg)';
+                    if (kineticR3) {
+                        kineticR3.style.transform = 'translate3d(' + (-kShift * 0.85).toFixed(1) + 'px, 0, 0) skewX(' + skewDeg + 'deg)';
                     }
                 }
             }
 
-            /* f) Chồng Thẻ Không Gian 3D Khi Cuộn (3D Stacking Sticky Cards) */
+            /* e) Bức Màn Không Gian Tách Đôi & Cửa Sổ Chiều Sâu 3D (Split Curtain Reveal) */
+            if (curtainSec && vw > 920) {
+                var cRect = curtainSec.getBoundingClientRect();
+                var cTop = cRect.top - scrollOffsetDelta;
+                var cTotal = curtainSec.offsetHeight - vh;
+                if (cTotal > 0 && cRect.bottom > -100 && cRect.top < vh + 100) {
+                    var cp = clamp(-cTop / cTotal, 0, 1);
+                    var openP = clamp(cp / 0.72, 0, 1);
+                    var easedOpen = 1 - Math.pow(1 - openP, 2.4);
+
+                    if (curtainL) {
+                        curtainL.style.transform = 'translate3d(' + (-easedOpen * 102).toFixed(2) + '%, 0, 0)';
+                    }
+                    if (curtainR) {
+                        curtainR.style.transform = 'translate3d(' + (easedOpen * 102).toFixed(2) + '%, 0, 0)';
+                    }
+                    if (curtainBgImg) {
+                        var bgScale = 1.28 - cp * 0.24;
+                        curtainBgImg.style.transform = 'translate3d(0, ' + (-8 + cp * 16).toFixed(2) + '%, 0) scale(' + bgScale.toFixed(3) + ')';
+                    }
+                    if (curtainCenter) {
+                        curtainCenter.style.transform = 'translate3d(0, ' + ((1 - easedOpen) * 65).toFixed(1) + 'px, 0) scale(' + (0.88 + easedOpen * 0.12).toFixed(3) + ')';
+                        curtainCenter.style.opacity = String(clamp(easedOpen * 1.25, 0, 1));
+                    }
+                    if (curtainFloatL) {
+                        curtainFloatL.style.transform = 'translate3d(0, ' + ((0.5 - cp) * 180).toFixed(1) + 'px, 0) rotate(' + (-8 + cp * 12).toFixed(1) + 'deg)';
+                        curtainFloatL.style.opacity = String(clamp((easedOpen - 0.2) * 1.4, 0, 1));
+                    }
+                    if (curtainFloatR) {
+                        curtainFloatR.style.transform = 'translate3d(0, ' + ((cp - 0.5) * 180).toFixed(1) + 'px, 0) rotate(' + (8 - cp * 12).toFixed(1) + 'deg)';
+                        curtainFloatR.style.opacity = String(clamp((easedOpen - 0.2) * 1.4, 0, 1));
+                    }
+                }
+            }
+
+            /* f) Dải Trượt Ngang Khi Cuộn Dọc + Nghiêng 3D Theo Gia Tốc (Horizontal Scroll Gallery) */
+            if (hscrollSec && hscrollTrack && vw > 920) {
+                var hRect = hscrollSec.getBoundingClientRect();
+                var hTop = hRect.top - scrollOffsetDelta;
+                var hTotal = hscrollSec.offsetHeight - vh;
+                if (hTotal > 0 && hRect.top <= vh && hRect.bottom >= 0) {
+                    var hp = clamp(-hTop / hTotal, 0, 1);
+                    var maxShift = Math.max(0, hscrollTrack.scrollWidth - vw + 90);
+                    hscrollTrack.style.transform = 'translate3d(' + (-hp * maxShift).toFixed(1) + 'px, 0, 0)';
+
+                    if (hscrollWatermark) {
+                        hscrollWatermark.style.transform = 'translate3d(' + (-hp * 420).toFixed(1) + 'px, -50%, 0)';
+                    }
+
+                    var curSlide = Math.min(5, Math.max(1, Math.floor(hp * 5) + 1));
+                    if (hscrollIdx) hscrollIdx.textContent = '0' + curSlide;
+                    if (hscrollFill) hscrollFill.style.width = Math.max(20, hp * 100).toFixed(1) + '%';
+
+                    var slideTilt = clamp(-clampVel * 0.28, -7, 7).toFixed(2);
+                    for (var k = 0; k < hscrollSlides.length; k++) {
+                        hscrollSlides[k].style.transform = 'rotateY(' + slideTilt + 'deg)';
+                    }
+                    for (var m = 0; m < hscrollImgs.length; m++) {
+                        hscrollImgs[m].style.transform = 'translate3d(' + (-16 + hp * 16).toFixed(2) + '%, 0, 0) scale(1.1)';
+                    }
+                }
+            }
+
+            /* g) Chồng Thẻ Không Gian 3D Khi Cuộn (3D Stacking Sticky Cards) */
             if (stackCards.length && vw > 920) {
                 for (var s = 0; s < stackCards.length; s++) {
                     var sc = stackCards[s];
                     var sImg = $('.stack-card-visual img', sc);
                     var sRect = sc.getBoundingClientRect();
+                    var sTop = sRect.top - scrollOffsetDelta;
                     if (sImg && sRect.bottom > 0 && sRect.top < vh) {
-                        var imgP = (vh - sRect.top) / (vh + sRect.height);
-                        sImg.style.transform = 'translate3d(0, ' + (-12 + imgP * 14) + '%, 0) scale(1.05)';
+                        var imgP = clamp((vh - sTop) / (vh + sRect.height), 0, 1);
+                        sImg.style.transform = 'translate3d(0, ' + (-14 + imgP * 18).toFixed(2) + '%, 0) scale(1.08)';
                     }
                     var nextCard = stackCards[s + 1];
                     if (nextCard) {
                         var nRect = nextCard.getBoundingClientRect();
-                        var overlap = Math.max(0, Math.min(1, (vh * 0.72 - nRect.top) / (vh * 0.5)));
-                        var scaleVal = 1 - overlap * 0.06;
-                        var brightVal = 1 - overlap * 0.22;
-                        sc.style.transform = 'scale(' + scaleVal + ')';
+                        var nTop = nRect.top - scrollOffsetDelta;
+                        var overlap = clamp((vh * 0.78 - nTop) / (vh * 0.52), 0, 1);
+                        var scaleVal = (1 - overlap * 0.08).toFixed(3);
+                        var brightVal = (1 - overlap * 0.28).toFixed(3);
+                        var liftY = (-overlap * 26).toFixed(1);
+                        var rotX = (-overlap * 5).toFixed(2);
+                        sc.style.transform = 'translate3d(0, ' + liftY + 'px, 0) scale(' + scaleVal + ') rotateX(' + rotX + 'deg)';
                         sc.style.filter = 'brightness(' + brightVal + ')';
                     }
                 }
             }
 
-            /* g) Tuyên Ngôn Chữ Sáng Dần Theo Nhịp Cuộn (Scroll-Scrubbed Words) */
+            /* h) Tuyên Ngôn Chữ Sáng Dần Theo Nhịp Cuộn (Scroll-Scrubbed Words) */
             if (scrubSec && scrubWords.length) {
                 var scRect = scrubSec.getBoundingClientRect();
-                var scProgress = (vh * 0.78 - scRect.top) / (scRect.height * 0.85);
-                var litCount = Math.floor(Math.max(0, Math.min(1, scProgress)) * scrubWords.length);
+                var scTop = scRect.top - scrollOffsetDelta;
+                var scProgress = (vh * 0.8 - scTop) / (scRect.height * 0.82);
+                var litCount = Math.floor(clamp(scProgress, 0, 1) * scrubWords.length);
                 for (var wIdx = 0; wIdx < scrubWords.length; wIdx++) {
                     scrubWords[wIdx].classList.toggle('lit', wIdx <= litCount);
                 }
             }
+
+            /* i) Parallax nội bộ cho từng bức ảnh trong Thẻ Di Sản (.heritage-card) */
+            if (cardImgs.length && vw > 920) {
+                for (var cIdx = 0; cIdx < cardImgs.length; cIdx++) {
+                    var cImg = cardImgs[cIdx];
+                    var cRect = cImg.getBoundingClientRect();
+                    if (cRect.bottom > 0 && cRect.top < vh) {
+                        var cpImg = clamp((vh - cRect.top) / (vh + cRect.height), 0, 1);
+                        cImg.style.translate = '0px ' + (-12 + cpImg * 24).toFixed(1) + 'px';
+                    }
+                }
+            }
         }
 
-        window.addEventListener('scroll', function () {
-            if (!ticking) {
-                requestAnimationFrame(updateParallax);
-                ticking = true;
+        function requestParallaxTick() {
+            if (!rafId) {
+                rafId = requestAnimationFrame(renderParallaxFrame);
             }
-        }, { passive: true });
-        window.addEventListener('resize', updateParallax, { passive: true });
-        updateParallax();
+        }
+
+        window.addEventListener('scroll', requestParallaxTick, { passive: true });
+        window.addEventListener('resize', requestParallaxTick, { passive: true });
+        renderParallaxFrame();
     }
 })();

@@ -37,15 +37,45 @@
 </header>
 
 <main>
+<!-- HUD La bàn Cuộn Parallax nổi bên phải màn hình -->
+<aside class="parallax-hud" id="parallax-hud" aria-hidden="true">
+    <div class="hud-compass">
+        <svg class="hud-wheel" id="hud-wheel" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+            <circle cx="50" cy="50" r="32" fill="none" stroke="currentColor" stroke-width="1"/>
+            <path d="M50 8 L54 46 L92 50 L54 54 L50 92 L46 54 L8 50 L46 46 Z" fill="currentColor" opacity="0.75"/>
+        </svg>
+        <span class="hud-pct" id="hud-pct">00%</span>
+    </div>
+    <div class="hud-dots">
+        <a href="#home" class="hud-dot active" title="Mở đầu"></a>
+        <a href="#portal-showcase" class="hud-dot" title="Cổng vòm kiến trúc"></a>
+        <a href="#curtain-showcase" class="hud-dot" title="Bức màn di sản"></a>
+        <a href="#hscroll-showcase" class="hud-dot" title="Hành trình ngang"></a>
+        <a href="#stack-showcase" class="hud-dot" title="4 tầng văn hiến"></a>
+        <a href="#scrub-manifesto" class="hud-dot" title="Tuyên ngôn"></a>
+    </div>
+</aside>
+
 <section class="hero" id="home">
     <div class="hero-bg-parallax" aria-hidden="true"></div>
+    <div class="hero-sunburst" id="hero-sunburst" aria-hidden="true">
+        <svg viewBox="0 0 400 400">
+            <circle cx="200" cy="200" r="188" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4 6"/>
+            <circle cx="200" cy="200" r="154" fill="none" stroke="currentColor" stroke-width="1.2"/>
+            <circle cx="200" cy="200" r="118" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="10 6"/>
+            <circle cx="200" cy="200" r="78" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M200 26 L212 178 L374 200 L212 222 L200 374 L188 222 L26 200 L188 178 Z" fill="currentColor" opacity="0.22"/>
+            <path d="M77 77 L186 176 L323 77 L224 186 L323 323 L214 224 L77 323 L176 214 Z" fill="currentColor" opacity="0.14"/>
+        </svg>
+    </div>
     <div class="arch-grid-lines" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-    <div class="hero-giant-text" id="hero-giant-text" aria-hidden="true">DI SẢN VIỆT NAM · NGÀN NĂM VĂN HIẾN</div>
-    <span class="orb o1" data-speed="-0.22"></span>
-    <span class="orb o2" data-speed="0.18"></span>
-    <span class="orb o3" data-speed="-0.14"></span>
+    <div class="hero-giant-text" id="hero-giant-text" aria-hidden="true">DI SẢN VIỆT NAM · NGÀN NĂM VĂN HIẾN · HERITAGE</div>
+    <span class="orb o1" data-speed="-0.36"></span>
+    <span class="orb o2" data-speed="0.28"></span>
+    <span class="orb o3" data-speed="-0.24"></span>
 
-    <div class="hero-content" data-speed="-0.1">
+    <div class="hero-content" id="hero-content-parallax">
         <p class="eyebrow reveal">KHÁM PHÁ · KẾT NỐI · LƯU GIỮ</p>
         <h1 class="reveal" style="--d:.1s">Bản đồ di sản <em>quê mình</em></h1>
         <p class="sub reveal" style="--d:.2s">Mỗi địa điểm là một dấu ấn lịch sử ngàn năm. Cùng hành trình khám phá <b class="typed" data-words="di tích lịch sử hào hùng|làng nghề truyền thống|kiến trúc cổ kính|câu chuyện quê hương">di tích lịch sử hào hùng</b></p>
@@ -68,7 +98,7 @@
             </span>
         </div>
     </div>
-    <div class="hero-showcase" data-speed="0.16" aria-hidden="true">
+    <div class="hero-showcase" id="hero-cards-parallax" aria-hidden="true">
         <div class="hero-card">
             <b>9+</b>
             <span>Địa điểm di sản tiêu biểu khắp 3 miền Bắc · Trung · Nam đang chờ bạn khám phá</span>
@@ -90,12 +120,12 @@
     </div>
 </div>
 
-<!-- 1. CỔNG VÒM KIẾN TRÚC PARALLAX MỞ RỘNG + CHỮ TÁCH ĐÔI (Phong cách ERA Residence) -->
+<!-- 1. CỔNG VÒM KIẾN TRÚC PARALLAX MỞ RỘNG + CHỮ TÁCH ĐÔI ĐA TẦNG (Phong cách ERA Residence) -->
 <section class="portal-section" id="portal-showcase">
     <div class="portal-sticky">
         <div class="arch-grid-lines" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
         <div class="portal-header" id="portal-header">
-            <p class="eyebrow">CỬA SỔ VƯỢT THỜI GIAN · SCROLL PARALLAX</p>
+            <p class="eyebrow">CỬA SỔ VƯỢT THỜI GIAN · MULTI-LAYER PARALLAX</p>
             <h2>Chạm vào chiều sâu kiến trúc Việt</h2>
         </div>
         <div class="portal-stage">
@@ -104,20 +134,35 @@
 
             <div class="portal-side-card left" id="portal-card-left" aria-hidden="true">
                 <img src="https://images.unsplash.com/photo-1573270689103-d7a4e42b609a?auto=format&fit=crop&w=600&q=80" alt="Thánh địa Mỹ Sơn" loading="lazy">
+                <span class="portal-side-label">Mỹ Sơn · Thế kỷ IV</span>
             </div>
             <div class="portal-side-card right" id="portal-card-right" aria-hidden="true">
                 <img src="https://images.unsplash.com/photo-1509030450996-dd1a26dda07a?auto=format&fit=crop&w=600&q=80" alt="Văn Miếu Quốc Tử Giám" loading="lazy">
+                <span class="portal-side-label">Văn Miếu · Năm 1070</span>
+            </div>
+
+            <div class="portal-floating-pill top-right" id="portal-pill-tr" aria-hidden="true">
+                <svg class="svg-icon sm" viewBox="0 0 24 24"><path d="M12 2L15 8L21 9L16.5 14L18 20L12 17L6 20L7.5 14L3 9L9 8L12 2Z"/></svg>
+                <span>Di sản Thế giới UNESCO</span>
+            </div>
+            <div class="portal-floating-pill bottom-left" id="portal-pill-bl" aria-hidden="true">
+                <svg class="svg-icon sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>Bảo tồn nguyên bản</span>
             </div>
 
             <div class="portal-arch" id="portal-arch">
                 <img id="portal-img" src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1920&q=85" alt="Kiến trúc Hoàng thành Huế">
                 <div class="portal-overlay">
                     <div class="portal-top-bar">
-                        <span class="portal-coords">16°28'11"N · 107°34'43"E · KINH ĐÔ CỔ</span>
-                        <div class="mood-switcher" role="group" aria-label="Chuyển đổi sắc thái Ngày và Đêm">
+                        <span class="portal-coords" id="portal-coords">16°28'11"N · 107°34'43"E · KINH ĐÔ CỔ</span>
+                        <div class="mood-switcher" role="group" aria-label="Chuyển đổi sắc thái không gian">
                             <button type="button" class="mood-btn active" data-mood="day">
                                 <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-                                Bình Minh Di Sản
+                                Bình Minh Cố Đô
+                            </button>
+                            <button type="button" class="mood-btn" data-mood="sunset">
+                                <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 18a5 5 0 0 0-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/><line x1="23" y1="22" x2="1" y2="22"/></svg>
+                                Hoàng Hôn Tháp Cổ
                             </button>
                             <button type="button" class="mood-btn" data-mood="night">
                                 <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -125,10 +170,10 @@
                             </button>
                         </div>
                     </div>
-                    <div class="portal-bottom-caption">
+                    <div class="portal-bottom-caption" id="portal-caption">
                         <span id="portal-tag">KIẾN TRÚC CUNG ĐÌNH &amp; ĐÔ THỊ CỔ</span>
                         <h3 id="portal-title">Vẻ đẹp trường tồn qua hàng thế kỷ</h3>
-                        <p id="portal-desc">Cuộn chuột xuống để mở rộng khung vòm kiến trúc và chuyển đổi giữa sắc nắng bình minh cùng đêm hội hoa đăng huyền ảo.</p>
+                        <p id="portal-desc">Cuộn chuột xuống để mở rộng khung vòm kiến trúc toàn màn hình và cảm nhận hiệu ứng chiều sâu không gian đa lớp.</p>
                     </div>
                 </div>
             </div>
@@ -136,7 +181,7 @@
     </div>
 </section>
 
-<!-- 2. DẢI CHỮ KINETIC PARALLAX ĐỐI NGƯỢC THEO TỐC ĐỘ CUỘN -->
+<!-- 2. DẢI CHỮ KINETIC 3 TẦNG NGHIÊNG THEO GIA TỐC CUỘN (Velocity-Skew Kinetic Ribbons) -->
 <section class="kinetic-bands" aria-hidden="true">
     <div class="kinetic-row r1" id="kinetic-r1">
         <span>DI SẢN VĂN HÓA</span><span>KIẾN TRÚC CUNG ĐÌNH</span><span>LÀNG NGHỀ CỔ TRUYỀN</span><span>KỲ QUAN THIÊN NHIÊN</span><span>KÝ ỨC DÂN TỘC</span><span>DI SẢN VĂN HÓA</span><span>KIẾN TRÚC CUNG ĐÌNH</span>
@@ -144,26 +189,81 @@
     <div class="kinetic-row r2" id="kinetic-r2">
         <span>HỘI AN · HUẾ · HẠ LONG</span><span>MỸ SƠN · VĂN MIẾU · TRÀNG AN</span><span>BÁT TRÀNG · THĂNG LONG · CỦ CHI</span><span>HỘI AN · HUẾ · HẠ LONG</span><span>MỸ SƠN · VĂN MIẾU · TRÀNG AN</span>
     </div>
+    <div class="kinetic-row r3" id="kinetic-r3">
+        <span>BẢN ĐỒ SỐ DI SẢN</span><span>NGÀN NĂM VĂN HIẾN VIỆT</span><span>LƯU GIỮ CHO MUÔN ĐỜI SAU</span><span>BẢN ĐỒ SỐ DI SẢN</span><span>NGÀN NĂM VĂN HIẾN VIỆT</span>
+    </div>
+</section>
+
+<!-- 3. BỨC MÀN KHÔNG GIAN TÁCH ĐÔI & CỬA SỔ CHIỀU SÂU 3D (Split Curtain Parallax Reveal) -->
+<section class="curtain-section" id="curtain-showcase">
+    <div class="curtain-sticky">
+        <!-- Lớp hậu cảnh chiều sâu bên trong mở ra khi cánh cổng tách đôi -->
+        <div class="curtain-deep-stage">
+            <img class="curtain-bg-img" id="curtain-bg-img" src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1920&q=85" alt="Kỳ quan Vịnh Hạ Long và Non nước Việt Nam" loading="lazy">
+            <div class="curtain-bg-overlay"></div>
+
+            <!-- Các thẻ ảnh vệ tinh bay nổi đa tốc độ bên trong khung cảnh -->
+            <div class="curtain-float-card cf-left" id="curtain-float-l" aria-hidden="true">
+                <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=600&q=80" alt="Thương cảng Hội An" loading="lazy">
+                <span>Thương cảng Hội An · Thế kỷ XVI</span>
+            </div>
+            <div class="curtain-float-card cf-right" id="curtain-float-r" aria-hidden="true">
+                <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=600&q=80" alt="Tinh hoa gốm Bát Tràng" loading="lazy">
+                <span>Gốm cổ Bát Tràng · Thế kỷ XIV</span>
+            </div>
+
+            <div class="curtain-center-content" id="curtain-center">
+                <p class="eyebrow">CÁNH CỔNG THỜI GIAN MỞ LỐI</p>
+                <h2>Non nước ngàn dặm<br><em>Hội tụ một khung nhìn</em></h2>
+                <p>Từ vùng vịnh biển ngọc bích Đông Bắc đến những rặng tháp Chăm cổ kính và địa đạo thép phương Nam – mỗi nhịp cuộn mở ra một tầng ký ức sống động của đất mẹ Việt Nam.</p>
+                <div class="hero-buttons" style="justify-content:center">
+                    <a href="ban-do.html" class="btn btn-primary">Mở bản đồ tương tác →</a>
+                    <a href="thu-vien.html" class="btn btn-outline">Triển lãm thị giác</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hai cánh cổng kiến trúc tách sang 2 bên khi cuộn -->
+        <div class="curtain-panel left" id="curtain-left" aria-hidden="true">
+            <div class="curtain-panel-inner">
+                <span class="curtain-sub">CỘI NGUỒN</span>
+                <strong class="curtain-big">DI SẢN</strong>
+                <div class="curtain-seal-half left">
+                    <svg viewBox="0 0 200 200"><circle cx="200" cy="100" r="82" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/><circle cx="200" cy="100" r="56" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M200 24 L182 88 L118 100 L182 112 L200 176 Z" fill="currentColor" opacity="0.35"/></svg>
+                </div>
+            </div>
+        </div>
+        <div class="curtain-panel right" id="curtain-right" aria-hidden="true">
+            <div class="curtain-panel-inner">
+                <span class="curtain-sub">TRƯỜNG TỒN</span>
+                <strong class="curtain-big">VIỆT NAM</strong>
+                <div class="curtain-seal-half right">
+                    <svg viewBox="0 0 200 200"><circle cx="0" cy="100" r="82" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/><circle cx="0" cy="100" r="56" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M0 24 L18 88 L82 100 L18 112 L0 176 Z" fill="currentColor" opacity="0.35"/></svg>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="section">
     <div class="arch-grid-lines" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
     <div class="container">
         <div class="stats">
-            <div class="stat reveal zoom" data-speed="-0.06"><b data-count="9" data-suffix="+">0</b><span>Di sản tiêu biểu</span></div>
-            <div class="stat reveal zoom" data-speed="0.06" style="--d:.1s"><b data-count="1000" data-suffix="+">0</b><span>Năm lịch sử văn hiến</span></div>
-            <div class="stat reveal zoom" data-speed="-0.06" style="--d:.2s"><b data-count="5">0</b><span>Nhóm loại hình di sản</span></div>
-            <div class="stat reveal zoom" data-speed="0.06" style="--d:.3s"><b data-count="100" data-suffix="%">0</b><span>Dự án phi lợi nhuận</span></div>
+            <div class="stat reveal zoom" data-speed="-0.12"><b data-count="9" data-suffix="+">0</b><span>Di sản tiêu biểu</span></div>
+            <div class="stat reveal zoom" data-speed="0.12" style="--d:.1s"><b data-count="1000" data-suffix="+">0</b><span>Năm lịch sử văn hiến</span></div>
+            <div class="stat reveal zoom" data-speed="-0.12" style="--d:.2s"><b data-count="5">0</b><span>Nhóm loại hình di sản</span></div>
+            <div class="stat reveal zoom" data-speed="0.12" style="--d:.3s"><b data-count="100" data-suffix="%">0</b><span>Dự án phi lợi nhuận</span></div>
         </div>
     </div>
 </section>
 
-<!-- 3. DẢI TRƯỢT NGANG PARALLAX KHI CUỘN DỌC (Horizontal Scroll Showcase kiểu ERA Residence) -->
+<!-- 4. DẢI TRƯỢT NGANG PARALLAX KHI CUỘN DỌC + NGHIÊNG 3D THEO TỐC ĐỘ (Horizontal Scroll Showcase) -->
 <section class="hscroll-section" id="hscroll-showcase">
     <div class="hscroll-sticky">
+        <div class="hscroll-bg-watermark" id="hscroll-watermark" aria-hidden="true">01 — HÀNH TRÌNH DI SẢN</div>
         <div class="hscroll-top">
             <div>
-                <p class="eyebrow">HÀNH TRÌNH XUYÊN KHÔNG GIAN</p>
+                <p class="eyebrow">HÀNH TRÌNH XUYÊN KHÔNG GIAN · 3D HORIZONTAL PARALLAX</p>
                 <h2>Tuyệt tác Di sản Bắc · Trung · Nam</h2>
             </div>
             <div class="hscroll-counter">
@@ -319,17 +419,23 @@
     </div>
 </section>
 
-<!-- 5. TUYÊN NGÔN CHỮ SÁNG DẦN THEO NHỊP CUỘN (Scroll-Scrubbed Word Reveal) -->
+<!-- 6. TUYÊN NGÔN CHỮ SÁNG DẦN THEO NHỊP CUỘN + 4 KHUNG ẢNH VỆ TINH (Scroll-Scrubbed Word Reveal) -->
 <section class="scrub-section" id="scrub-manifesto">
-    <div class="scrub-float-img f1" data-speed="-0.22" aria-hidden="true">
+    <div class="scrub-float-img f1" data-speed="-0.38" aria-hidden="true">
         <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=600&q=80" alt="Đèn lồng Hội An" loading="lazy">
     </div>
-    <div class="scrub-float-img f2" data-speed="0.22" aria-hidden="true">
+    <div class="scrub-float-img f2" data-speed="0.42" aria-hidden="true">
         <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=600&q=80" alt="Vịnh Hạ Long" loading="lazy">
     </div>
+    <div class="scrub-float-img f3" data-speed="-0.3" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=600&q=80" alt="Hoàng thành Huế" loading="lazy">
+    </div>
+    <div class="scrub-float-img f4" data-speed="0.32" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1573270689103-d7a4e42b609a?auto=format&fit=crop&w=600&q=80" alt="Thánh địa Mỹ Sơn" loading="lazy">
+    </div>
     <div class="scrub-container">
-        <p class="eyebrow" style="justify-content:center">TUYÊN NGÔN DI SẢN SỐ</p>
-        <p class="scrub-text" id="scrub-text" data-gold="di,sản,ký,ức,quá,khứ,tương,lai,quê,hương">
+        <p class="eyebrow" style="justify-content:center">TUYÊN NGÔN DI SẢN SỐ · SCROLL SCRUBBING</p>
+        <p class="scrub-text" id="scrub-text" data-gold="di,sản,ký,ức,quá,khứ,tương,lai,quê,hương,dân,tộc,việt,nam">
             “Mỗi mái đình rêu phong, mỗi ngọn tháp cổ kính hay từng nhịp thở làng nghề đều là di sản sống động kết tinh ký ức ngàn năm của cha ông. Khi thế hệ trẻ thấu hiểu quá khứ và trân quý cội nguồn quê hương, chúng ta sẽ viết tiếp tương lai rạng rỡ của dân tộc Việt Nam.”
         </p>
     </div>
@@ -344,21 +450,21 @@
             <p class="lead reveal">Từ định vị trực quan trên bản đồ số đến lắng nghe và sẻ chia câu chuyện của chính quê hương bạn.</p>
         </div>
         <div class="features">
-            <a href="ban-do.html" class="feature reveal" data-speed="-0.04">
+            <a href="ban-do.html" class="feature reveal" data-speed="-0.11">
                 <div class="icon">
                     <svg class="svg-icon lg" viewBox="0 0 24 24" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
                 </div>
                 <h3>Khám phá địa điểm</h3>
                 <p>Chọn một di sản theo vùng miền và bản đồ tương tác sẽ bay thẳng tới tọa độ thực tế của địa danh đó.</p>
             </a>
-            <a href="cau-chuyen.html" class="feature reveal" data-speed="0.04" style="--d:.12s">
+            <a href="cau-chuyen.html" class="feature reveal" data-speed="0.11" style="--d:.12s">
                 <div class="icon">
                     <svg class="svg-icon lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                 </div>
                 <h3>Tìm hiểu lịch sử</h3>
                 <p>Đọc và nghe những câu chuyện được sưu tầm, đối chiếu tư liệu lịch sử gắn liền với từng mái đình, bến nước.</p>
             </a>
-            <a href="dong-gop.html" class="feature reveal" data-speed="-0.04" style="--d:.24s">
+            <a href="dong-gop.html" class="feature reveal" data-speed="-0.11" style="--d:.24s">
                 <div class="icon">
                     <svg class="svg-icon lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
                 </div>
