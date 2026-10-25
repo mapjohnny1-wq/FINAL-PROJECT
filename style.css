@@ -2561,6 +2561,339 @@ h3, h4 {
     transform: translateY(-4px);
 }
 
+/* ---------- Hiệu ứng Scroll Parallax kiểu ERA Residence ---------- */
+[data-speed] {
+    will-change: transform;
+}
+
+.hero-bg-parallax {
+    position: absolute;
+    inset: -12% 0;
+    background:
+        linear-gradient(108deg, rgba(6, 20, 14, 0.92) 12%, rgba(12, 38, 28, 0.68) 56%, rgba(12, 38, 28, 0.42)),
+        url("https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1920&q=85") center / cover no-repeat;
+    will-change: transform;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Đường kẻ khung kiến trúc (Architectural Framing Lines) */
+.arch-grid-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.arch-grid-lines span {
+    border-left: 1px solid rgba(212, 163, 70, 0.09);
+    height: 100%;
+}
+
+.arch-grid-lines span:last-child {
+    border-right: 1px solid rgba(212, 163, 70, 0.09);
+}
+
+/* 1. Cổng Vòm Kiến Trúc Mở Rộng Khi Cuộn (ERA Residence Arch Portal Zoom) */
+.portal-section {
+    position: relative;
+    height: 210vh;
+    background: var(--cream);
+    overflow: visible;
+}
+
+.portal-sticky {
+    position: sticky;
+    top: 72px;
+    height: calc(100vh - 72px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 5%;
+    overflow: hidden;
+}
+
+.portal-header {
+    text-align: center;
+    margin-bottom: 22px;
+    z-index: 3;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.portal-header h2 {
+    font-size: clamp(26px, 3.8vw, 42px);
+    color: var(--green);
+}
+
+[data-theme="dark"] .portal-header h2 {
+    color: #f4f8f5;
+}
+
+.portal-arch {
+    position: relative;
+    width: min(560px, 88vw);
+    height: 58vh;
+    border-radius: 280px 280px 24px 24px;
+    overflow: hidden;
+    box-shadow: 0 32px 70px -15px rgba(9, 28, 20, 0.45);
+    border: 2px solid rgba(212, 163, 70, 0.45);
+    will-change: width, height, border-radius;
+    z-index: 2;
+}
+
+.portal-arch img {
+    width: 100%;
+    height: 120%;
+    object-fit: cover;
+    transform: translateY(-8%) scale(1.08);
+    will-change: transform, filter;
+    transition: filter 0.6s ease;
+}
+
+[data-theme="dark"] .portal-arch img {
+    filter: brightness(0.78) contrast(1.08);
+}
+
+.portal-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(6, 20, 14, 0.88) 0%, rgba(6, 20, 14, 0.22) 55%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px 36px;
+    color: #fff;
+}
+
+.portal-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.portal-coords {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    background: rgba(6, 20, 14, 0.6);
+    padding: 6px 14px;
+    border-radius: 30px;
+    border: 1px solid rgba(245, 217, 150, 0.3);
+    backdrop-filter: blur(8px);
+}
+
+.mood-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(6, 20, 14, 0.68);
+    border: 1px solid rgba(245, 217, 150, 0.35);
+    padding: 5px;
+    border-radius: 40px;
+    backdrop-filter: blur(10px);
+}
+
+.mood-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 30px;
+    border: 0;
+    background: transparent;
+    color: #d6e4dc;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.mood-btn.active {
+    background: var(--gold);
+    color: var(--green-dark);
+}
+
+.portal-bottom-caption {
+    max-width: 640px;
+}
+
+.portal-bottom-caption span {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.portal-bottom-caption h3 {
+    font-size: clamp(24px, 3.4vw, 38px);
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.portal-bottom-caption p {
+    font-size: 15px;
+    color: #dce8e0;
+}
+
+/* 2. Dải Trượt Ngang Khi Cuộn Dọc (ERA Residence Horizontal Scroll Gallery) */
+.hscroll-section {
+    position: relative;
+    height: 300vh;
+    background: var(--green-dark);
+    color: #fff;
+}
+
+.hscroll-sticky {
+    position: sticky;
+    top: 72px;
+    height: calc(100vh - 72px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    padding: 36px 0;
+}
+
+.hscroll-top {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto 28px;
+    padding: 0 6%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.hscroll-top h2 {
+    font-size: clamp(26px, 3.6vw, 42px);
+    color: #fff;
+    margin-bottom: 0;
+}
+
+.hscroll-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-head);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--gold-light);
+}
+
+.hscroll-bar {
+    width: 120px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.hscroll-bar-fill {
+    display: block;
+    height: 100%;
+    width: 20%;
+    background: var(--gold);
+    transition: width 0.1s linear;
+}
+
+.hscroll-track {
+    display: flex;
+    gap: 32px;
+    padding: 0 6%;
+    will-change: transform;
+    width: max-content;
+}
+
+.hscroll-slide {
+    position: relative;
+    width: min(520px, 82vw);
+    height: min(430px, 56vh);
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(245, 217, 150, 0.25);
+    background: #0d261c;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
+}
+
+.hscroll-slide-img {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.hscroll-slide-img img {
+    width: 118%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    transform: translateX(-8%);
+    will-change: transform;
+    transition: transform 0.6s ease;
+}
+
+.hscroll-slide:hover .hscroll-slide-img img {
+    transform: translateX(-4%) scale(1.05);
+}
+
+.hscroll-slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(5, 16, 12, 0.92) 0%, rgba(5, 16, 12, 0.3) 55%, transparent 100%);
+}
+
+.hscroll-slide-body {
+    position: relative;
+    z-index: 2;
+    padding: 28px 30px;
+}
+
+.hscroll-num {
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--gold-light);
+    display: block;
+    margin-bottom: 6px;
+}
+
+.hscroll-slide-body h3 {
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.hscroll-slide-body p {
+    font-size: 14.5px;
+    color: #cfe0d6;
+    margin-bottom: 16px;
+}
+
+/* Parallax ảnh bên trong thẻ di sản */
+.card-img img {
+    will-change: transform;
+}
+
 /* ---------- Keyframe Animations ---------- */
 @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -2708,6 +3041,40 @@ h3, h4 {
     .festival-grid,
     .quiz-options {
         grid-template-columns: 1fr;
+    }
+    .portal-section {
+        height: auto;
+        padding: 64px 0;
+    }
+    .portal-sticky {
+        position: static;
+        height: auto;
+    }
+    .portal-arch {
+        width: 100% !important;
+        height: 440px !important;
+        border-radius: 140px 140px 20px 20px !important;
+    }
+    .hscroll-section {
+        height: auto;
+        padding: 64px 0;
+    }
+    .hscroll-sticky {
+        position: static;
+        height: auto;
+        padding: 0;
+    }
+    .hscroll-track {
+        width: 100%;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 16px;
+        transform: none !important;
+    }
+    .hscroll-slide {
+        scroll-snap-align: start;
+        width: min(400px, 84vw);
+        height: 390px;
     }
     .timeline::before {
         left: 18px;

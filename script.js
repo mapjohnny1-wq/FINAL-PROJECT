@@ -667,4 +667,118 @@
             showToast('Cảm ơn bạn! Di sản đã được hiển thị ngay bên dưới.');
         });
     }
+
+    /* 18. Hệ thống Scroll Parallax Đa Tầng, Cổng Vòm Mở Rộng & Cuộn Ngang (ERA Residence Style) */
+    var heroBg = $('.hero-bg-parallax');
+    var speedEls = $$('[data-speed]');
+    var portalSec = $('#portal-showcase');
+    var portalArch = $('#portal-arch');
+    var portalImg = $('#portal-img');
+    var hscrollSec = $('#hscroll-showcase');
+    var hscrollTrack = $('#hscroll-track');
+    var hscrollIdx = $('#hscroll-index');
+    var hscrollFill = $('#hscroll-fill');
+    var hscrollImgs = $$('.hscroll-slide-img img');
+
+    /* Chuyển đổi sắc thái Ngày / Đêm ngay trên Cổng Vòm */
+    var moodBtns = $$('.mood-btn');
+    if (moodBtns.length) {
+        moodBtns.forEach(function (mBtn) {
+            mBtn.addEventListener('click', function () {
+                moodBtns.forEach(function (b) { b.classList.remove('active'); });
+                mBtn.classList.add('active');
+                var mood = mBtn.getAttribute('data-mood');
+                var isNight = mood === 'night';
+                if (isNight) document.documentElement.setAttribute('data-theme', 'dark');
+                else document.documentElement.removeAttribute('data-theme');
+                try { localStorage.setItem('disan-theme', isNight ? 'dark' : 'light'); } catch (e) {}
+                $$('.theme-toggle').forEach(updateThemeBtn);
+
+                var pTitle = $('#portal-title'), pDesc = $('#portal-desc'), pTag = $('#portal-tag');
+                if (portalImg) {
+                    portalImg.src = isNight
+                        ? 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1920&q=85'
+                        : 'https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1920&q=85';
+                }
+                if (pTag) pTag.textContent = isNight ? 'ĐÊM HỘI HOA ĐĂNG · HỘI AN' : 'KIẾN TRÚC CUNG ĐÌNH & ĐÔ THỊ CỔ';
+                if (pTitle) pTitle.textContent = isNight ? 'Lung linh sắc vàng đêm phố cổ' : 'Vẻ đẹp trường tồn qua hàng thế kỷ';
+                if (pDesc) pDesc.textContent = isNight
+                    ? 'Khi màn đêm buông xuống, hàng nghìn chiếc đèn lồng thắp sáng dòng sông Hoài tạo nên bức tranh di sản huyền ảo.'
+                    : 'Cuộn chuột xuống để mở rộng khung vòm kiến trúc và chuyển đổi giữa sắc nắng bình minh cùng đêm hội hoa đăng.';
+            });
+        });
+    }
+
+    if (!reduce) {
+        var ticking = false;
+        function updateParallax() {
+            ticking = false;
+            var sy = window.scrollY || window.pageYOffset;
+            var vh = window.innerHeight;
+            var vw = window.innerWidth;
+
+            /* a) Hero Background Zoom + Translate Parallax */
+            if (heroBg && sy < vh * 1.4) {
+                var heroScale = 1 + (sy * 0.00018);
+                heroBg.style.transform = 'translate3d(0, ' + (sy * 0.32) + 'px, 0) scale(' + heroScale + ')';
+            }
+
+            /* b) Các phần tử có thuộc tính data-speed dịch chuyển đa tầng */
+            if (vw > 920) {
+                for (var i = 0; i < speedEls.length; i++) {
+                    var el = speedEls[i];
+                    var sp = parseFloat(el.getAttribute('data-speed')) || 0;
+                    var rect = el.getBoundingClientRect();
+                    var centerOffset = (rect.top + rect.height / 2) - vh / 2;
+                    if (rect.bottom > -200 && rect.top < vh + 200) {
+                        el.style.transform = 'translate3d(0, ' + (centerOffset * sp) + 'px, 0)';
+                    }
+                }
+            }
+
+            /* c) Cổng Vòm Kiến Trúc Mở Rộng Khi Cuộn (Portal Arch Expand) */
+            if (portalSec && portalArch && vw > 920) {
+                var pRect = portalSec.getBoundingClientRect();
+                var totalScroll = portalSec.offsetHeight - vh;
+                if (totalScroll > 0) {
+                    var p = Math.max(0, Math.min(1, -pRect.top / totalScroll));
+                    var wPct = 48 + p * 46; /* Mở rộng từ 48vw lên 94vw */
+                    var hPct = 56 + p * 30; /* Mở rộng từ 56vh lên 86vh */
+                    var archRadius = Math.round(280 * (1 - p) + 24 * p);
+                    portalArch.style.width = wPct + 'vw';
+                    portalArch.style.height = hPct + 'vh';
+                    portalArch.style.borderRadius = archRadius + 'px ' + archRadius + 'px 24px 24px';
+                    if (portalImg) {
+                        portalImg.style.transform = 'translate3d(0, ' + (-12 + p * 12) + '%, 0) scale(' + (1.12 - p * 0.08) + ')';
+                    }
+                }
+            }
+
+            /* d) Dải Trượt Ngang Khi Cuộn Dọc (Horizontal Scroll Gallery) */
+            if (hscrollSec && hscrollTrack && vw > 920) {
+                var hRect = hscrollSec.getBoundingClientRect();
+                var hTotal = hscrollSec.offsetHeight - vh;
+                if (hTotal > 0 && hRect.top <= vh && hRect.bottom >= 0) {
+                    var hp = Math.max(0, Math.min(1, -hRect.top / hTotal));
+                    var maxShift = Math.max(0, hscrollTrack.scrollWidth - vw + 80);
+                    hscrollTrack.style.transform = 'translate3d(' + (-hp * maxShift) + 'px, 0, 0)';
+                    var curSlide = Math.min(5, Math.max(1, Math.floor(hp * 5) + 1));
+                    if (hscrollIdx) hscrollIdx.textContent = '0' + curSlide;
+                    if (hscrollFill) hscrollFill.style.width = Math.max(20, hp * 100) + '%';
+                    for (var k = 0; k < hscrollImgs.length; k++) {
+                        hscrollImgs[k].style.transform = 'translate3d(' + (-12 + hp * 12) + '%, 0, 0) scale(1.06)';
+                    }
+                }
+            }
+        }
+
+        window.addEventListener('scroll', function () {
+            if (!ticking) {
+                requestAnimationFrame(updateParallax);
+                ticking = true;
+            }
+        }, { passive: true });
+        window.addEventListener('resize', updateParallax, { passive: true });
+        updateParallax();
+    }
 })();
