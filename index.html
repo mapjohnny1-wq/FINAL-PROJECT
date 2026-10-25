@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bản Đồ Di Sản Quê Mình</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <a href="#home" class="logo">DI SẢN<span>.</span></a>
+
+    <nav>
+        <a href="#home">Trang chủ</a>
+        <a href="#map">Bản đồ</a>
+        <a href="#heritage">Di sản</a>
+        <a href="#stories">Câu chuyện</a>
+        <a href="#contribute">Đóng góp</a>
+    </nav>
+</header>
+
+<main>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p class="eyebrow">KHÁM PHÁ · KẾT NỐI · LƯU GIỮ</p>
+            <h1>Bản đồ di sản<br>quê mình</h1>
+            <p>
+                Mỗi địa điểm là một dấu ấn lịch sử.
+                Cùng nhau khám phá những giá trị văn hóa
+                thân thuộc và kể lại câu chuyện quê hương.
+            </p>
+            <div class="hero-buttons">
+                <a href="#map" class="btn btn-primary">Khám phá bản đồ</a>
+                <a href="#contribute" class="btn btn-outline">Thêm di sản</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="intro section">
+        <p class="eyebrow">VỀ DỰ ÁN</p>
+        <h2>Lưu giữ những giá trị quê hương</h2>
+        <p class="description">
+            Bản Đồ Di Sản Quê Mình là dự án cộng đồng dành cho học sinh,
+            giúp mọi người tìm hiểu các địa điểm văn hóa, lịch sử tại
+            nơi mình sinh sống thông qua bản đồ, hình ảnh và những câu
+            chuyện được sưu tầm.
+        </p>
+
+        <div class="stats">
+            <div class="stat">
+                <span>01</span>
+                <p>Khám phá địa điểm</p>
+            </div>
+            <div class="stat">
+                <span>02</span>
+                <p>Tìm hiểu lịch sử</p>
+            </div>
+            <div class="stat">
+                <span>03</span>
+                <p>Chia sẻ câu chuyện</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section map-section" id="map">
+        <div class="section-heading">
+            <p class="eyebrow">BẢN ĐỒ KHÁM PHÁ</p>
+            <h2>Tìm di sản quanh bạn</h2>
+            <p class="description">
+                Quan sát bản đồ và khám phá các khu vực có giá trị
+                văn hóa, lịch sử.
+            </p>
+        </div>
+
+        <div class="map-layout">
+            <div class="map-info">
+                <h3>Hành trình di sản</h3>
+                <p>
+                    Bản đồ giúp bạn xác định vị trí, tìm hiểu khu vực
+                    và lên kế hoạch tham quan những địa điểm đáng nhớ.
+                </p>
+                <div class="map-item">
+                    <span>01</span>
+                    <div>
+                        <h4>Di tích lịch sử</h4>
+                        <p>Những dấu mốc của quá khứ.</p>
+                    </div>
+                </div>
+                <div class="map-item">
+                    <span>02</span>
+                    <div>
+                        <h4>Công trình văn hóa</h4>
+                        <p>Đình, chùa và kiến trúc truyền thống.</p>
+                    </div>
+                </div>
+                <div class="map-item">
+                    <span>03</span>
+                    <div>
+                        <h4>Làng nghề truyền thống</h4>
+                        <p>Nơi lưu giữ kỹ năng và bản sắc địa phương.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <iframe
+                    title="Bản đồ khám phá di sản Việt Nam"
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=106.60%2C10.72%2C106.78%2C10.86&layer=mapnik"
+                    loading="lazy">
+                </iframe>
+                <p class="map-caption">
+                    Bản đồ tham khảo khu vực Thành phố Hồ Chí Minh.
+                    Vị trí ghim di sản của dự án cần được bổ sung riêng.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="heritage">
+        <div class="section-heading">
+            <p class="eyebrow">KHO DI SẢN</p>
+            <h2>Những nơi lưu giữ ký ức</h2>
+            <p class="description">
+                Một số địa điểm tiêu biểu để bắt đầu hành trình tìm hiểu
+                lịch sử và văn hóa Việt Nam.
+            </p>
+        </div>
+
+        <div class="heritage-grid">
+            <article class="heritage-card">
+                <img
+                    src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=800&q=80"
+                    alt="Phong cảnh và kiến trúc Việt Nam">
+                <div class="card-content">
+                    <span class="tag">Di sản văn hóa</span>
+                    <h3>Phố cổ Hội An</h3>
+                    <p>
+                        Nổi bật với những ngôi nhà cổ, mái ngói rêu phong
+                        và dấu ấn giao lưu văn hóa qua nhiều thế kỷ.
+                    </p>
+                    <a href="#story-hoian" class="text-link">Đọc câu chuyện →</a>
+                </div>
+            </article>
+
+            <article class="heritage-card">
+                <img
+                    src="https://images.unsplash.com/photo-1573270689103-d7a4e42b609a?auto=format&fit=crop&w=800&q=80"
+                    alt="Công trình kiến trúc lịch sử">
+                <div class="card-content">
+                    <span class="tag">Di tích lịch sử</span>
+                    <h3>Địa danh lịch sử quê em</h3>
+                    <p>
+                        Hãy bổ sung tên một di tích tại địa phương,
+                        cùng địa chỉ và tư liệu lịch sử đã kiểm chứng.
+                    </p>
+                    <a href="#contribute" class="text-link">Khám phá thêm →</a>
+                </div>
+            </article>
+
+            <article class="heritage-card">
+                <img
+                    src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=800&q=80"
+                    alt="Phố cổ với kiến trúc truyền thống">
+                <div class="card-content">
+                    <span class="tag">Kiến trúc truyền thống</span>
+                    <h3>Không gian văn hóa xưa</h3>
+                    <p>
+                        Tìm hiểu các công trình, phong tục và nét sinh hoạt
+                        gắn liền với đời sống của người dân địa phương.
+                    </p>
+                    <a href="#stories" class="text-link">Đọc câu chuyện →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="section stories-section" id="stories">
+        <div class="section-heading">
+            <p class="eyebrow">GÓC KỂ CHUYỆN</p>
+            <h2>Mỗi di sản, một câu chuyện</h2>
+            <p class="description">
+                Lịch sử không chỉ nằm trong sách vở mà còn hiện diện
+                trong những con đường và công trình quanh ta.
+            </p>
+        </div>
+
+        <div class="story-grid">
+            <article class="story" id="story-hoian">
+                <span class="story-number">CÂU CHUYỆN 01</span>
+                <h3>Phố cổ Hội An – Dấu ấn thời gian</h3>
+                <p>
+                    Hội An từng là thương cảng quốc tế sầm uất.
+                    Những ngôi nhà cổ và công trình kiến trúc nơi đây
+                    phản ánh quá trình giao lưu giữa nhiều nền văn hóa.
+                    Ngày nay, phố cổ là nơi giúp thế hệ trẻ hiểu thêm
+                    về lịch sử thương mại và đời sống truyền thống.
+                </p>
+                <p class="source-note">
+                    Gợi ý: Đối chiếu thông tin với tư liệu của cơ quan
+                    quản lý di sản trước khi đăng chính thức.
+                </p>
+            </article>
+
+            <article class="story">
+                <span class="story-number">CÂU CHUYỆN 02</span>
+                <h3>Câu chuyện từ quê hương em</h3>
+                <p>
+                    Một ngôi đình, cây cầu cũ hay làng nghề truyền thống
+                    đều có thể lưu giữ những ký ức quý giá. Hãy hỏi người
+                    lớn tuổi, tìm tài liệu địa phương và ghi lại những
+                    câu chuyện có nguồn gốc rõ ràng.
+                </p>
+                <a href="#contribute" class="text-link">
+                    Chia sẻ câu chuyện →
+                </a>
+            </article>
+        </div>
+    </section>
+
+    <section class="section contribute-section" id="contribute">
+        <div class="contribute-layout">
+            <div class="contribute-text">
+                <p class="eyebrow">CÙNG NHAU ĐÓNG GÓP</p>
+                <h2>Hãy để di sản quê mình được biết đến</h2>
+                <p>
+                    Bạn biết một địa điểm thú vị? Hãy chuẩn bị thông tin,
+                    hình ảnh và câu chuyện để đóng góp cho bản đồ chung
+                    của lớp.
+                </p>
+                <ul>
+                    <li>Tên và địa chỉ địa điểm</li>
+                    <li>Loại hình di sản</li>
+                    <li>Hình ảnh do bạn chụp hoặc có quyền sử dụng</li>
+                    <li>Câu chuyện và nguồn tài liệu tham khảo</li>
+                </ul>
+            </div>
+
+            <form class="contribute-form" action="#" method="get">
+                <h3>Thông tin địa điểm</h3>
+
+                <label for="place-name">Tên địa điểm</label>
+                <input id="place-name" name="place-name"
+                       type="text" placeholder="Nhập tên di sản" required>
+
+                <label for="address">Địa chỉ</label>
+                <input id="address" name="address"
+                       type="text" placeholder="Phường, xã, tỉnh/thành" required>
+
+                <label for="category">Loại di sản</label>
+                <select id="category" name="category" required>
+                    <option value="">Chọn loại di sản</option>
+                    <option>Di tích lịch sử</option>
+                    <option>Di sản văn hóa</option>
+                    <option>Công trình kiến trúc</option>
+                    <option>Làng nghề truyền thống</option>
+                    <option>Địa điểm khác</option>
+                </select>
+
+                <label for="image-link">Liên kết hình ảnh</label>
+                <input id="image-link" name="image-link"
+                       type="url" placeholder="https://...">
+
+                <label for="story-content">Câu chuyện về địa điểm</label>
+                <textarea id="story-content" name="story-content"
+                          rows="5" placeholder="Viết câu chuyện, thông tin lịch sử và nguồn tham khảo..."
+                          required></textarea>
+
+                <button type="submit" class="btn btn-primary">
+                    Gửi thông tin
+                </button>
+
+                <p class="form-note">
+                    Bản demo HTML/CSS: biểu mẫu chưa lưu hoặc gửi
+                    thông tin đến người quản lý.
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <section class="closing">
+        <p class="eyebrow">DI SẢN LÀ KÝ ỨC</p>
+        <h2>Hiểu quá khứ, trân trọng hiện tại,<br>gìn giữ tương lai.</h2>
+        <a href="#map" class="btn btn-primary">Bắt đầu khám phá</a>
+    </section>
+</main>
+
+<footer class="footer">
+    <a href="#home" class="logo">DI SẢN<span>.</span></a>
+    <p>Dự án học sinh: Bản Đồ Di Sản Quê Mình</p>
+    <p>Khám phá quê hương bằng tri thức và sự sẻ chia.</p>
+    <a href="#home">Về đầu trang ↑</a>
+</footer>
+
+</body>
+</html>
