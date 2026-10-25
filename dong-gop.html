@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gửi thông tin di sản quê bạn để cùng xây dựng bản đồ chung.">
+    <title>Đóng góp | Bản Đồ Di Sản Quê Mình</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;0,900;1,600&display=swap&subset=vietnamese" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<header class="header">
+    <a href="index.html" class="logo">DI SẢN<span>.</span></a>
+    <button class="burger" aria-label="Mở menu" aria-expanded="false" aria-controls="nav"><span></span></button>
+    <nav class="nav" id="nav">
+            <a href="index.html">Trang chủ</a>
+            <a href="gioi-thieu.html">Giới thiệu</a>
+            <a href="ban-do.html">Bản đồ</a>
+            <a href="di-san.html">Di sản</a>
+            <a href="cau-chuyen.html">Câu chuyện</a>
+            <a href="dong-gop.html" class="nav-cta active">Đóng góp</a>
+    </nav>
+</header>
+<section class="page-hero">
+    <span class="orb o1"></span><span class="orb o2"></span>
+    <div class="container">
+        <p class="crumbs"><a href="index.html">Trang chủ</a> / Đóng góp</p>
+        <h1 class="reveal">Cùng nhau đóng góp</h1>
+        <p class="sub reveal" style="--d:.15s">Hãy để di sản quê mình được biết đến.</p>
+    </div>
+</section>
+
+<main>
+<section class="section">
+    <div class="container contribute-layout">
+        <div class="reveal left">
+            <p class="eyebrow">CHUẨN BỊ</p>
+            <h2>Bạn cần những gì?</h2>
+            <p class="lead">Bạn biết một địa điểm thú vị? Hãy chuẩn bị thông tin, hình ảnh và câu chuyện để đóng góp cho bản đồ chung của lớp.</p>
+            <ul class="steps">
+                <li>Tên và địa chỉ địa điểm</li>
+                <li>Loại hình di sản</li>
+                <li>Hình ảnh do bạn chụp hoặc có quyền sử dụng</li>
+                <li>Câu chuyện và nguồn tài liệu tham khảo</li>
+            </ul>
+        </div>
+        <form class="contribute-form reveal right" action="#" method="post">
+            <h3>Thông tin địa điểm</h3>
+            <label for="place-name">Tên địa điểm</label>
+            <input id="place-name" name="place-name" type="text" placeholder="Nhập tên di sản" required>
+            <label for="address">Địa chỉ</label>
+            <input id="address" name="address" type="text" placeholder="Phường, xã, tỉnh/thành" required>
+            <label for="category">Loại di sản</label>
+            <select id="category" name="category" required>
+                <option value="">Chọn loại di sản</option>
+                <option>Di tích lịch sử</option>
+                <option>Di sản văn hóa</option>
+                <option>Công trình kiến trúc</option>
+                <option>Làng nghề truyền thống</option>
+                <option>Địa điểm khác</option>
+            </select>
+            <label for="image-link">Liên kết hình ảnh</label>
+            <input id="image-link" name="image-link" type="url" placeholder="https://...">
+            <label for="story-content">Câu chuyện về địa điểm</label>
+            <textarea id="story-content" name="story-content" rows="5" placeholder="Viết câu chuyện, thông tin lịch sử và nguồn tham khảo..." required></textarea>
+            <button type="submit" class="btn btn-primary">Gửi thông tin →</button>
+            <p class="form-note">Bản demo: biểu mẫu chỉ lưu tạm trên trình duyệt của bạn, chưa gửi đến người quản lý.</p>
+        </form>
+    </div>
+</section>
+</main>
+
+<section class="closing">
+    <p class="eyebrow reveal">DI SẢN LÀ KÝ ỨC</p>
+    <h2 class="reveal" style="--d:.1s">Hiểu quá khứ, trân trọng hiện tại,<br>gìn giữ tương lai.</h2>
+    <a href="ban-do.html" class="btn btn-primary reveal" style="--d:.2s">Xem bản đồ →</a>
+</section>
+
+<footer class="footer">
+    <div class="footer-grid">
+        <div>
+            <a href="index.html" class="logo">DI SẢN<span>.</span></a>
+            <p>Dự án học sinh “Bản Đồ Di Sản Quê Mình” – khám phá quê hương bằng tri thức và sự sẻ chia.</p>
+        </div>
+        <div><h4>TRANG</h4><ul><li><a href="index.html">Trang chủ</a></li><li><a href="gioi-thieu.html">Giới thiệu</a></li><li><a href="ban-do.html">Bản đồ</a></li><li><a href="di-san.html">Di sản</a></li><li><a href="cau-chuyen.html">Câu chuyện</a></li><li><a href="dong-gop.html">Đóng góp</a></li></ul></div>
+        <div><h4>LIÊN HỆ</h4><ul><li>Lớp dự án Di sản</li><li>Email: disan@example.com</li><li>Bản demo học tập</li></ul></div>
+    </div>
+    <div class="copy"><span>© 2026 Bản Đồ Di Sản Quê Mình</span><span>Làm bằng HTML · CSS · JavaScript</span></div>
+</footer>
+<button class="to-top" aria-label="Lên đầu trang">↑</button>
+<div class="toast" role="status" aria-live="polite"></div>
+<script src="script.js"></script>
+</body>
+</html>
