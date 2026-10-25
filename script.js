@@ -4,7 +4,20 @@
     var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
     var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* 1. Chế độ Sáng / Tối (Theme Toggle) */
+    /* Bộ Icon Vector SVG thuần (Không dùng Emoji) */
+    var ICONS = {
+        sun: '<svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>',
+        moon: '<svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
+        pin: '<svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+        tag: '<svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>',
+        clock: '<svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+        user: '<svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+        volume: '<svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>',
+        stop: '<svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>',
+        drum: '<svg class="drum-pattern" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="94" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 4"/><circle cx="100" cy="100" r="76" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="100" cy="100" r="54" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="8 4"/><circle cx="100" cy="100" r="32" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M100 68 L106 90 L128 84 L112 100 L128 116 L106 110 L100 132 L94 110 L72 116 L88 100 L72 84 L94 90 Z" fill="currentColor" opacity="0.45"/></svg>'
+    };
+
+    /* 1. Chế độ Sáng / Tối (Theme Toggle bằng SVG) */
     var savedTheme = '';
     try { savedTheme = localStorage.getItem('disan-theme') || ''; } catch (e) {}
     if (savedTheme === 'dark') {
@@ -14,7 +27,7 @@
     function updateThemeBtn(btn) {
         if (!btn) return;
         var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        btn.textContent = isDark ? '☀️' : '🌙';
+        btn.innerHTML = isDark ? ICONS.sun : ICONS.moon;
         btn.setAttribute('aria-label', isDark ? 'Chuyển sang giao diện sáng' : 'Chuyển sang giao diện tối');
         btn.setAttribute('title', isDark ? 'Giao diện Sáng' : 'Giao diện Đêm phố cổ');
     }
@@ -31,7 +44,77 @@
         });
     });
 
-    /* 2. Thanh tiến trình, Header dính & Nút lên đầu trang */
+    /* Chèn hoa văn Trống Đồng SVG xoay nền vào Hero */
+    var heroContainer = $('.hero') || $('.page-hero');
+    if (heroContainer && !$('.drum-pattern', heroContainer)) {
+        heroContainer.insertAdjacentHTML('beforeend', ICONS.drum);
+    }
+
+    /* 2. Con trỏ chuột Nghệ thuật (Custom Cursor) & Nút bấm Từ tính (Magnetic) */
+    if (!reduce && window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        var dot = document.createElement('div');
+        dot.className = 'cursor-dot';
+        var ring = document.createElement('div');
+        ring.className = 'cursor-ring';
+        document.body.appendChild(dot);
+        document.body.appendChild(ring);
+
+        var mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
+        window.addEventListener('mousemove', function (e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            dot.style.left = mouseX + 'px';
+            dot.style.top = mouseY + 'px';
+        }, { passive: true });
+
+        (function animateCursor() {
+            ringX += (mouseX - ringX) * 0.18;
+            ringY += (mouseY - ringY) * 0.18;
+            ring.style.left = ringX + 'px';
+            ring.style.top = ringY + 'px';
+            requestAnimationFrame(animateCursor);
+        })();
+
+        document.addEventListener('mouseover', function (e) {
+            if (e.target.closest('a, button, .heritage-card, .gallery-item, .feature, .quiz-opt')) {
+                ring.classList.add('active');
+            } else {
+                ring.classList.remove('active');
+            }
+        });
+
+        /* Hiệu ứng từ tính (Magnetic) nhẹ trên nút bấm */
+        $$('.btn, .theme-toggle').forEach(function (el) {
+            el.addEventListener('mousemove', function (e) {
+                var r = el.getBoundingClientRect();
+                var dx = (e.clientX - (r.left + r.width / 2)) * 0.22;
+                var dy = (e.clientY - (r.top + r.height / 2)) * 0.22;
+                el.style.transform = 'translate(' + dx + 'px, ' + dy + 'px)';
+            });
+            el.addEventListener('mouseleave', function () {
+                el.style.transform = '';
+            });
+        });
+    }
+
+    /* 3. Hiệu ứng Gợn sóng khi bấm nút (Ripple Effect) */
+    document.addEventListener('click', function (e) {
+        var target = e.target.closest('.btn, .chip');
+        if (!target || reduce) return;
+        var rect = target.getBoundingClientRect();
+        var wave = document.createElement('span');
+        wave.className = 'ripple-wave';
+        var size = Math.max(rect.width, rect.height);
+        wave.style.width = wave.style.height = size + 'px';
+        wave.style.left = (e.clientX - rect.left - size / 2) + 'px';
+        wave.style.top = (e.clientY - rect.top - size / 2) + 'px';
+        target.appendChild(wave);
+        setTimeout(function () {
+            if (wave.parentNode) wave.parentNode.removeChild(wave);
+        }, 650);
+    });
+
+    /* 4. Thanh tiến trình, Header dính & Nút lên đầu trang */
     var progress = $('.progress'), header = $('.header'), toTop = $('.to-top');
     function onScroll() {
         var h = document.documentElement;
@@ -48,7 +131,7 @@
         });
     }
 
-    /* 3. Menu di động */
+    /* 5. Menu di động */
     var burger = $('.burger'), nav = $('.nav');
     function closeMenu() {
         if (!burger || !nav) return;
@@ -74,7 +157,7 @@
         window.addEventListener('resize', function () { if (innerWidth > 920) closeMenu(); });
     }
 
-    /* 4. Hiệu ứng hiện dần khi cuộn tới (IntersectionObserver) */
+    /* 6. Hiệu ứng hiện dần khi cuộn tới (IntersectionObserver) */
     var reveals = $$('.reveal');
     if ('IntersectionObserver' in window && !reduce) {
         var io = new IntersectionObserver(function (entries) {
@@ -90,7 +173,7 @@
         reveals.forEach(function (el) { el.classList.add('in'); });
     }
 
-    /* 5. Hiệu ứng đếm số thống kê */
+    /* 7. Hiệu ứng đếm số thống kê */
     function countUp(el) {
         var target = parseInt(el.getAttribute('data-count'), 10) || 0;
         var suffix = el.getAttribute('data-suffix') || '';
@@ -117,7 +200,7 @@
         counters.forEach(countUp);
     }
 
-    /* 6. Chữ gõ tự động ở Hero */
+    /* 8. Chữ gõ tự động ở Hero */
     var typed = $('.typed');
     if (typed) {
         var words = (typed.getAttribute('data-words') || '').split('|').filter(Boolean);
@@ -136,7 +219,7 @@
         }
     }
 
-    /* 7. Đốm sáng đèn lồng bay lơ lửng trên Hero (Canvas) */
+    /* 9. Đốm sáng đèn lồng bay lơ lửng & Kết nối tia sáng trên Hero (Canvas) */
     var heroEl = $('.hero');
     if (heroEl && !reduce) {
         var canvas = document.createElement('canvas');
@@ -151,14 +234,14 @@
         }
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas, { passive: true });
-        for (var i = 0; i < 28; i++) {
+        for (var i = 0; i < 32; i++) {
             particles.push({
                 x: Math.random() * (w || 1200),
                 y: Math.random() * (h || 700),
-                r: Math.random() * 2.6 + 1,
-                vx: (Math.random() - 0.5) * 0.35,
-                vy: -Math.random() * 0.45 - 0.15,
-                a: Math.random() * 0.65 + 0.2
+                r: Math.random() * 2.8 + 1.1,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: -Math.random() * 0.48 - 0.15,
+                a: Math.random() * 0.65 + 0.25
             });
         }
         (function drawParticles() {
@@ -172,14 +255,14 @@
                 if (pt.x > w + 10) pt.x = -10;
                 ctx.beginPath();
                 ctx.arc(pt.x, pt.y, pt.r, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(244, 213, 141, ' + pt.a + ')';
+                ctx.fillStyle = 'rgba(245, 217, 150, ' + pt.a + ')';
                 ctx.fill();
             }
             requestAnimationFrame(drawParticles);
         })();
     }
 
-    /* 8. Hiệu ứng Spotlight & Nghiêng 3D khi rê chuột */
+    /* 10. Hiệu ứng Spotlight & Nghiêng 3D khi rê chuột */
     if (!reduce && window.matchMedia && matchMedia('(hover: hover)').matches) {
         $$('.heritage-card, .feature, .stat').forEach(function (card) {
             card.addEventListener('mousemove', function (e) {
@@ -213,7 +296,7 @@
         }
     }
 
-    /* 9. Bộ lọc & Tìm kiếm trực tiếp trên trang Di sản */
+    /* 11. Bộ lọc & Tìm kiếm trực tiếp trên trang Di sản */
     var chips = $$('.filters .chip');
     var searchInput = $('#heritage-search');
     var filterStatus = $('#filter-count');
@@ -254,7 +337,7 @@
         searchInput.addEventListener('input', filterHeritageCards);
     }
 
-    /* 10. Bản đồ tương tác + Bộ lọc vùng miền */
+    /* 12. Bản đồ tương tác + Bộ lọc vùng miền */
     var mapFrame = $('#map-frame');
     if (mapFrame) {
         var cap = $('#map-name'), capDesc = $('#map-desc'), gmapLink = $('#map-gmap'), storyLink = $('#map-story');
@@ -291,7 +374,7 @@
         });
     }
 
-    /* 11. Hộp thoại Xem nhanh (Modal Lightbox cho Thẻ di sản & Thư viện ảnh) */
+    /* 13. Hộp thoại Xem nhanh (Modal Lightbox bằng SVG) */
     var modalBackdrop = $('.modal-backdrop');
     if (!modalBackdrop) {
         modalBackdrop = document.createElement('div');
@@ -332,9 +415,9 @@
         $('.modal-title', modalBackdrop).textContent = data.title || '';
         $('.modal-desc', modalBackdrop).textContent = data.desc || '';
         var metaHtml = '';
-        if (data.tag) metaHtml += '<span>🏷️ ' + data.tag + '</span>';
-        if (data.loc) metaHtml += '<span>' + data.loc + '</span>';
-        if (data.era) metaHtml += '<span>⏳ ' + data.era + '</span>';
+        if (data.tag) metaHtml += '<span>' + ICONS.tag + ' ' + data.tag + '</span>';
+        if (data.loc) metaHtml += '<span>' + ICONS.pin + ' ' + data.loc + '</span>';
+        if (data.era) metaHtml += '<span>' + ICONS.clock + ' ' + data.era + '</span>';
         $('.modal-meta', modalBackdrop).innerHTML = metaHtml;
         var storyBtn = $('.modal-story-btn', modalBackdrop);
         if (storyBtn) storyBtn.href = data.link || 'cau-chuyen.html';
@@ -342,7 +425,6 @@
         modalBackdrop.setAttribute('aria-hidden', 'false');
     }
 
-    /* Gắn nút "Xem nhanh" tự động hoặc bắt sự kiện cho thẻ di sản */
     $$('.heritage-card').forEach(function (card) {
         var quickBtn = $('.quick-btn', card);
         if (quickBtn) {
@@ -358,16 +440,15 @@
                     img: imgEl ? imgEl.src : '',
                     title: titleEl ? titleEl.textContent : '',
                     desc: card.getAttribute('data-detail') || (descEl ? descEl.textContent : ''),
-                    tag: tagEl ? tagEl.textContent : '',
-                    loc: locEl ? locEl.textContent : '',
-                    era: eraEl ? eraEl.textContent : '',
+                    tag: tagEl ? tagEl.textContent.trim() : '',
+                    loc: locEl ? locEl.textContent.trim() : '',
+                    era: eraEl ? eraEl.textContent.trim() : '',
                     link: linkEl ? linkEl.getAttribute('href') : 'cau-chuyen.html'
                 });
             });
         }
     });
 
-    /* Bắt sự kiện phóng to ảnh ở trang Thư viện */
     $$('.gallery-item').forEach(function (item) {
         item.addEventListener('click', function () {
             var imgEl = $('img', item);
@@ -379,13 +460,128 @@
                 title: titleEl ? titleEl.textContent : '',
                 desc: descEl ? descEl.textContent : '',
                 tag: tagEl ? tagEl.textContent : 'Tư liệu di sản',
-                loc: item.getAttribute('data-loc') || '📍 Việt Nam',
+                loc: item.getAttribute('data-loc') || 'Việt Nam',
                 link: 'di-san.html'
             });
         });
     });
 
-    /* 12. Accordion */
+    /* 14. Trình đọc Âm thanh câu chuyện (Web Speech API) */
+    if ('speechSynthesis' in window) {
+        $$('.story').forEach(function (story) {
+            var btn = $('.speak-btn', story);
+            if (!btn) return;
+            btn.addEventListener('click', function () {
+                var synth = window.speechSynthesis;
+                if (btn.classList.contains('playing')) {
+                    synth.cancel();
+                    btn.classList.remove('playing');
+                    btn.innerHTML = ICONS.volume + ' Nghe đọc';
+                    return;
+                }
+                synth.cancel();
+                $$('.speak-btn.playing').forEach(function (b) {
+                    b.classList.remove('playing');
+                    b.innerHTML = ICONS.volume + ' Nghe đọc';
+                });
+                var title = ($('h3', story) || {}).textContent || '';
+                var body = ($('p', story) || {}).textContent || '';
+                var utter = new SpeechSynthesisUtterance(title + '. ' + body);
+                utter.lang = 'vi-VN';
+                utter.rate = 1.0;
+                utter.onend = function () {
+                    btn.classList.remove('playing');
+                    btn.innerHTML = ICONS.volume + ' Nghe đọc';
+                };
+                btn.classList.add('playing');
+                btn.innerHTML = ICONS.stop + ' Dừng đọc';
+                synth.speak(utter);
+            });
+        });
+    }
+
+    /* 15. Trò chơi tương tác: Thử tài Di sản Việt (#quiz-widget) */
+    var quizBox = $('#quiz-widget');
+    if (quizBox) {
+        var questions = [
+            {
+                q: 'Trường đại học đầu tiên của Việt Nam được thành lập vào năm 1076 dưới triều đại nhà Lý là di tích nào?',
+                opts: ['Hoàng thành Thăng Long', 'Văn Miếu – Quốc Tử Giám', 'Kinh thành Huế', 'Thánh địa Mỹ Sơn'],
+                ans: 1,
+                note: 'Chính xác! Quốc Tử Giám được lập năm 1076 bên cạnh Văn Miếu, nơi lưu giữ 82 bia Tiến sĩ.'
+            },
+            {
+                q: 'Cụm đền tháp cổ nào tại Quảng Nam nổi tiếng với kỹ thuật xây gạch nung không lộ mạch vữa của người Chăm Pa?',
+                opts: ['Thánh địa Mỹ Sơn', 'Chùa Cầu Hội An', 'Tháp Phổ Minh', 'Thành nhà Hồ'],
+                ans: 0,
+                note: 'Tuyệt vời! Thánh địa Mỹ Sơn quy tụ hơn 70 đền tháp Chăm Pa cổ từ thế kỷ IV đến XIII.'
+            },
+            {
+                q: 'Di sản nào tại Ninh Bình được UNESCO công nhận là Di sản Thế giới hỗn hợp (cả Văn hóa và Thiên nhiên) đầu tiên của Việt Nam?',
+                opts: ['Vịnh Hạ Long', 'Phong Nha – Kẻ Bàng', 'Quần thể danh thắng Tràng An', 'Cao nguyên đá Đồng Văn'],
+                ans: 2,
+                note: 'Đúng rồi! Danh thắng Tràng An được UNESCO vinh danh Di sản kép vào năm 2014.'
+            },
+            {
+                q: 'Làng nghề truyền thống hơn 700 năm tuổi nằm bên tả ngạn sông Hồng (Gia Lâm, Hà Nội) nổi danh với sản phẩm nào?',
+                opts: ['Tranh dân gian Đông Hồ', 'Nón bài thơ Phú Cam', 'Gốm sứ Bát Tràng', 'Đúc đồng Ngũ Xã'],
+                ans: 2,
+                note: 'Xuất sắc! Làng gốm Bát Tràng nổi tiếng với các dòng gốm men lam, men ngọc, men rạn.'
+            }
+        ];
+        var qi = 0, score = 0;
+        var stepEl = $('.quiz-step', quizBox);
+        var scoreEl = $('.quiz-score', quizBox);
+        var qEl = $('.quiz-q', quizBox);
+        var optsEl = $('.quiz-options', quizBox);
+        var msgEl = $('.quiz-msg', quizBox);
+        var nextBtn = $('.quiz-next', quizBox);
+
+        function renderQuiz() {
+            var item = questions[qi];
+            stepEl.textContent = 'Câu hỏi ' + (qi + 1) + ' / ' + questions.length;
+            scoreEl.textContent = 'Điểm: ' + score + '/' + questions.length;
+            qEl.textContent = item.q;
+            msgEl.textContent = 'Chọn một đáp án bên trên để kiểm tra.';
+            nextBtn.style.display = 'none';
+            optsEl.innerHTML = item.opts.map(function (opt, idx) {
+                return '<button type="button" class="quiz-opt" data-idx="' + idx + '">' + opt + '</button>';
+            }).join('');
+            $$('.quiz-opt', optsEl).forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var chosen = parseInt(btn.getAttribute('data-idx'), 10);
+                    $$('.quiz-opt', optsEl).forEach(function (b, bi) {
+                        b.disabled = true;
+                        if (bi === item.ans) b.classList.add('correct');
+                    });
+                    if (chosen === item.ans) {
+                        score++;
+                        msgEl.textContent = item.note;
+                    } else {
+                        btn.classList.add('wrong');
+                        msgEl.textContent = 'Chưa chính xác. ' + item.note;
+                    }
+                    scoreEl.textContent = 'Điểm: ' + score + '/' + questions.length;
+                    nextBtn.textContent = qi < questions.length - 1 ? 'Câu tiếp theo →' : 'Chơi lại từ đầu';
+                    nextBtn.style.display = 'inline-flex';
+                });
+            });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function () {
+                if (qi < questions.length - 1) {
+                    qi++;
+                } else {
+                    qi = 0;
+                    score = 0;
+                }
+                renderQuiz();
+            });
+        }
+        renderQuiz();
+    }
+
+    /* 16. Accordion */
     $$('.acc-item').forEach(function (item) {
         var btn = $('.acc-btn', item), panel = $('.acc-panel', item);
         if (!btn || !panel) return;
@@ -396,7 +592,7 @@
         });
     });
 
-    /* 13. Biểu mẫu đóng góp & Hiển thị đóng góp cộng đồng */
+    /* 17. Biểu mẫu đóng góp & Hiển thị đóng góp cộng đồng (Không dùng Emoji) */
     var toast = $('.toast');
     function showToast(msg) {
         if (!toast) return;
@@ -423,12 +619,12 @@
                     '<div class="card-img">' +
                         '<img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=800&q=75" alt="Chùa Cầu Hội An" loading="lazy">' +
                         '<span class="tag">Cộng đồng đóng góp</span>' +
-                        '<span class="loc">📍 Quảng Nam</span>' +
+                        '<span class="loc">' + ICONS.pin + ' Quảng Nam</span>' +
                     '</div>' +
                     '<div class="card-content">' +
                         '<h3>Chùa Cầu (Lai Viễn Kiều)</h3>' +
                         '<p>Biểu tượng giao lưu văn hóa hơn 400 năm tuổi bắc qua nhánh sông nhỏ giữa lòng phố cổ.</p>' +
-                        '<div class="card-actions"><span class="text-link">Người gửi: Nhóm Học sinh Lớp 12A</span></div>' +
+                        '<div class="card-actions"><span class="text-link">' + ICONS.user + ' Nhóm Học sinh Lớp 12A</span></div>' +
                     '</div>' +
                 '</article>';
             return;
@@ -442,12 +638,12 @@
                     '<div class="card-img">' +
                         '<img src="' + img + '" alt="' + escapeHtml(item['place-name']) + '" loading="lazy">' +
                         '<span class="tag">' + escapeHtml(item['category'] || 'Di sản địa phương') + '</span>' +
-                        '<span class="loc">📍 ' + escapeHtml(item['address'] || 'Việt Nam') + '</span>' +
+                        '<span class="loc">' + ICONS.pin + ' ' + escapeHtml(item['address'] || 'Việt Nam') + '</span>' +
                     '</div>' +
                     '<div class="card-content">' +
                         '<h3>' + escapeHtml(item['place-name']) + '</h3>' +
                         '<p>' + escapeHtml(item['story-content']) + '</p>' +
-                        '<div class="card-actions"><span class="text-link">✍️ Đóng góp bởi: ' + escapeHtml(item['author'] || 'Bạn đọc') + '</span></div>' +
+                        '<div class="card-actions"><span class="text-link">' + ICONS.user + ' Đóng góp bởi: ' + escapeHtml(item['author'] || 'Bạn đọc') + '</span></div>' +
                     '</div>' +
                 '</article>'
             );
@@ -468,7 +664,7 @@
             } catch (err) {}
             form.reset();
             renderCommunityContributions();
-            showToast('🎉 Cảm ơn bạn! Di sản đã được hiển thị ngay bên dưới.');
+            showToast('Cảm ơn bạn! Di sản đã được hiển thị ngay bên dưới.');
         });
     }
 })();

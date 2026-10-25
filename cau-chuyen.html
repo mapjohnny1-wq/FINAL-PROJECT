@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mỗi di sản là một câu chuyện – đọc những câu chuyện lịch sử và văn hóa được sưu tầm từ khắp mọi miền.">
+    <meta name="description" content="Mỗi di sản là một câu chuyện – đọc và nghe những câu chuyện lịch sử, văn hóa được sưu tầm từ khắp mọi miền.">
     <title>Câu chuyện | Bản Đồ Di Sản Quê Mình</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,12 @@
 <body>
 <div class="progress" aria-hidden="true"></div>
 <header class="header">
-    <a href="index.html" class="logo"><span class="logo-mark">🏮</span>DI SẢN<span>.</span></a>
+    <a href="index.html" class="logo">
+        <span class="logo-mark" aria-hidden="true">
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2L15 8L21 9L16.5 14L18 20L12 17L6 20L7.5 14L3 9L9 8L12 2Z"/></svg>
+        </span>
+        DI SẢN<span class="dot">.</span>
+    </a>
     <nav class="nav" id="nav">
         <a href="index.html">Trang chủ</a>
         <a href="gioi-thieu.html">Giới thiệu</a>
@@ -24,7 +29,9 @@
         <a href="dong-gop.html" class="nav-cta">Đóng góp</a>
     </nav>
     <div class="header-actions">
-        <button class="theme-toggle" type="button" aria-label="Đổi giao diện Sáng/Tối">🌙</button>
+        <button class="theme-toggle" type="button" aria-label="Đổi giao diện Sáng/Tối">
+            <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
         <button class="burger" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="nav"><span></span></button>
     </div>
 </header>
@@ -45,61 +52,133 @@
             <article class="story reveal" id="hoi-an">
                 <div class="story-meta">
                     <span class="story-number">CÂU CHUYỆN 01 · QUẢNG NAM</span>
-                    <span class="read-time">⏱️ 3 phút đọc</span>
+                    <span class="read-time">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        3 phút đọc
+                    </span>
                 </div>
                 <h3>Phố cổ Hội An – Thương cảng vàng son bên dòng Thu Bồn</h3>
                 <p>Từ thế kỷ XVI đến thế kỷ XIX, Hội An (Faifo) là nơi thuyền buôn từ Nhật Bản, Trung Hoa, Bồ Đào Nha và Hà Lan tấp nập cập bến trao đổi tơ lụa, gốm sứ và hương liệu. Những ngôi nhà hình ống lợp ngói âm dương, Chùa Cầu hơn 400 năm tuổi và các hội quán cổ kính là minh chứng cho sự giao thoa văn hóa hài hòa mà vẫn đậm đà bản sắc Việt.</p>
-                <p class="source-note">📚 Nguồn tham khảo: Trung tâm Quản lý Bảo tồn Di sản Văn hóa Hội An &amp; Hồ sơ Di sản Thế giới UNESCO (1999).</p>
+                <div class="story-footer">
+                    <p class="source-note">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        Nguồn: Trung tâm Quản lý Bảo tồn Di sản Văn hóa Hội An (UNESCO 1999).
+                    </p>
+                    <button type="button" class="speak-btn">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                        Nghe đọc
+                    </button>
+                </div>
             </article>
 
             <article class="story reveal" id="hue" style="--d:.1s">
                 <div class="story-meta">
                     <span class="story-number">CÂU CHUYỆN 02 · THỪA THIÊN HUẾ</span>
-                    <span class="read-time">⏱️ 4 phút đọc</span>
+                    <span class="read-time">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        4 phút đọc
+                    </span>
                 </div>
                 <h3>Hoàng thành Huế – Quy hoạch phong thủy của kinh đô xưa</h3>
                 <p>Khởi công từ năm 1805 dưới triều vua Gia Long, Kinh thành Huế lấy núi Ngự Bình làm tiền án, cồn Hến và cồn Dã Viên làm thế “tả thanh long, hữu bạch hổ” và dòng sông Hương làm minh đường. Giữa biến thiên lịch sử, Ngọ Môn, Điện Thái Hòa và Nhã nhạc cung đình Huế vẫn trường tồn như biểu tượng đỉnh cao của nghệ thuật kiến trúc Việt Nam thế kỷ XIX.</p>
-                <p class="source-note">📚 Nguồn tham khảo: Trung tâm Bảo tồn Di tích Cố đô Huế &amp; Đại Nam Thực Lục.</p>
+                <div class="story-footer">
+                    <p class="source-note">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        Nguồn: Trung tâm Bảo tồn Di tích Cố đô Huế &amp; Đại Nam Thực Lục.
+                    </p>
+                    <button type="button" class="speak-btn">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                        Nghe đọc
+                    </button>
+                </div>
             </article>
 
             <article class="story reveal" id="ha-long">
                 <div class="story-meta">
                     <span class="story-number">CÂU CHUYỆN 03 · QUẢNG NINH</span>
-                    <span class="read-time">⏱️ 3 phút đọc</span>
+                    <span class="read-time">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        3 phút đọc
+                    </span>
                 </div>
                 <h3>Vịnh Hạ Long – Huyền thoại Rồng hạ sơn giữ bờ cõi</h3>
                 <p>Tương truyền thuở mới lập quốc, khi giặc ngoại xâm tiến vào từ đường biển, Ngọc Hoàng đã sai đàn Rồng xuống giúp dân Việt giữ nước. Đàn rồng phun châu nhả ngọc tạo thành bức tường thành đá vôi sừng sững chặn bước tiến thuyền giặc. Tên gọi “Hạ Long” (nơi Rồng đáp xuống) từ đó gắn liền với kỳ quan thiên nhiên gần 2.000 hòn đảo kỳ vĩ hôm nay.</p>
-                <p class="source-note">📚 Nguồn tham khảo: Ban Quản lý Vịnh Hạ Long &amp; Kho tàng Truyện cổ Dân gian Việt Nam.</p>
+                <div class="story-footer">
+                    <p class="source-note">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        Nguồn: Ban Quản lý Vịnh Hạ Long &amp; Kho tàng Truyện cổ Dân gian Việt Nam.
+                    </p>
+                    <button type="button" class="speak-btn">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                        Nghe đọc
+                    </button>
+                </div>
             </article>
 
             <article class="story reveal" id="my-son" style="--d:.1s">
                 <div class="story-meta">
                     <span class="story-number">CÂU CHUYỆN 04 · QUẢNG NAM</span>
-                    <span class="read-time">⏱️ 4 phút đọc</span>
+                    <span class="read-time">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        4 phút đọc
+                    </span>
                 </div>
                 <h3>Thánh địa Mỹ Sơn – Bí ẩn kỹ thuật xây gạch không mạch vữa</h3>
                 <p>Ẩn mình trong thung lũng đường kính khoảng 2km được bao bọc bởi núi đồi, Mỹ Sơn từng là trung tâm tín ngưỡng quan trọng nhất của vương quốc Chăm Pa suốt 9 thế kỷ. Điều làm giới khảo cổ kinh ngạc đến tận ngày nay là những ngọn tháp gạch đỏ au gắn kết chặt chẽ hoàn toàn không lộ mạch vữa và không hề đóng rêu qua hàng ngàn năm mưa nắng.</p>
-                <p class="source-note">📚 Nguồn tham khảo: Ban Quản lý Di sản Văn hóa Mỹ Sơn (UNESCO công nhận năm 1999).</p>
+                <div class="story-footer">
+                    <p class="source-note">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        Nguồn: Ban Quản lý Di sản Văn hóa Mỹ Sơn (UNESCO 1999).
+                    </p>
+                    <button type="button" class="speak-btn">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                        Nghe đọc
+                    </button>
+                </div>
             </article>
 
             <article class="story reveal" id="van-mieu">
                 <div class="story-meta">
                     <span class="story-number">CÂU CHUYỆN 05 · HÀ NỘI</span>
-                    <span class="read-time">⏱️ 3 phút đọc</span>
+                    <span class="read-time">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        3 phút đọc
+                    </span>
                 </div>
                 <h3>Văn Miếu – Quốc Tử Giám và lời khắc trên 82 bia Tiến sĩ</h3>
                 <p>Năm 1076, vua Lý Nhân Tông cho lập Quốc Tử Giám bên cạnh Văn Miếu, mở đầu nền giáo dục đại học chính quy của Đại Việt. Trên 82 tấm bia đá đặt trên lưng rùa tại vườn bia, bài ký năm 1442 của Tiến sĩ Thân Nhân Trung khắc cốt ghi tâm câu nói bất hủ: “Hiền tài là nguyên khí của quốc gia, nguyên khí thịnh thì thế nước mạnh”.</p>
-                <p class="source-note">📚 Nguồn tham khảo: Trung tâm Hoạt động Văn hóa Khoa học Văn Miếu – Quốc Tử Giám.</p>
+                <div class="story-footer">
+                    <p class="source-note">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        Nguồn: Trung tâm Hoạt động Văn hóa Khoa học Văn Miếu – Quốc Tử Giám.
+                    </p>
+                    <button type="button" class="speak-btn">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                        Nghe đọc
+                    </button>
+                </div>
             </article>
 
             <article class="story reveal" id="bat-trang" style="--d:.1s">
                 <div class="story-meta">
                     <span class="story-number">CÂU CHUYỆN 06 · GIA LÂM, HÀ NỘI</span>
-                    <span class="read-time">⏱️ 3 phút đọc</span>
+                    <span class="read-time">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        3 phút đọc
+                    </span>
                 </div>
                 <h3>Làng gốm Bát Tràng – Lửa lò đỏ rực bảy trăm năm</h3>
                 <p>Theo sử sách, khi vua Lý Thái Tổ dời đô về Thăng Long năm 1010, năm dòng họ làm gốm lớn đã hội tụ bên bãi đất sét trắng ven sông Hồng lập nên Bạch Thổ Phường (nay là Bát Tràng). Qua bàn tay chuốt gốm điêu luyện và bí quyết pha chế men lam, men rạn từ tro trấu và đất phù sa, từng chiếc bát, bình gốm đều mang hơi thở tâm hồn người thợ Việt.</p>
-                <p class="source-note">📚 Nguồn tham khảo: Hiệp hội Làng nghề Việt Nam &amp; Dư địa chí Hà Nội.</p>
+                <div class="story-footer">
+                    <p class="source-note">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        Nguồn: Hiệp hội Làng nghề Việt Nam &amp; Dư địa chí Hà Nội.
+                    </p>
+                    <button type="button" class="speak-btn">
+                        <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                        Nghe đọc
+                    </button>
+                </div>
             </article>
         </div>
     </div>
@@ -139,7 +218,12 @@
 <footer class="footer">
     <div class="footer-grid">
         <div>
-            <a href="index.html" class="logo"><span class="logo-mark">🏮</span>DI SẢN<span>.</span></a>
+            <a href="index.html" class="logo">
+                <span class="logo-mark" aria-hidden="true">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2L15 8L21 9L16.5 14L18 20L12 17L6 20L7.5 14L3 9L9 8L12 2Z"/></svg>
+                </span>
+                DI SẢN<span class="dot">.</span>
+            </a>
             <p>Dự án học sinh “Bản Đồ Di Sản Quê Mình” – số hóa, kết nối và lan tỏa tình yêu văn hóa lịch sử Việt Nam bằng tri thức trẻ.</p>
         </div>
         <div>
@@ -162,9 +246,18 @@
         <div>
             <h4>THÔNG TIN LIÊN HỆ</h4>
             <ul>
-                <li>📍 Nhóm Dự án Di sản Học đường</li>
-                <li>✉️ Email: disanqueminh@edu.vn</li>
-                <li>🌐 Phiên bản Web Sáng tạo 2026</li>
+                <li>
+                    <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Nhóm Dự án Di sản Học đường
+                </li>
+                <li>
+                    <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Email: disanqueminh@edu.vn
+                </li>
+                <li>
+                    <svg class="svg-icon sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    Phiên bản Web Sáng tạo 2026
+                </li>
             </ul>
         </div>
     </div>
